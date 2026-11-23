@@ -524,3 +524,21 @@ test "R02 unknown mock version cannot silently act fixed" {
     Some({ stage: "ADAPTER", code: "UNREGISTERED_VERSION", path: "", }),
   )
 }
+
+///|
+test "H05 oversized manual input keeps original without shrinking" {
+  let spec = demo()
+  let c : Case = {
+    index: 0,
+    args: {
+      "date": "2024-02-29",
+      "context": "",
+      "options": { "tags": [] },
+      "unused": Json::string(String::make(70000, 'x')),
+    },
+    category: "manual",
+    expected: None,
+  }
+  let reduced = shrink(spec, c, "buggy")
+  @debug.assert_eq(reduced.attempts, 0)
+}

@@ -1,0 +1,82 @@
+{
+  "format_version": 1,
+  "release": "0.1.0",
+  "commit_binding": "manifest.json source_commit and raw summary.json source_commit",
+  "dimensions": [
+    {
+      "dimension": "engineering",
+      "status": "passed_locally",
+      "evidence": [
+        "evidence/local-harness/summary.json",
+        "evidence/local-harness/unit-tests.log",
+        "evidence/benchmark/summary.json",
+        "docs/ai-review.md"
+      ],
+      "external_gaps": [
+        "remote CI run identifier/link",
+        "human review sign-off"
+      ]
+    },
+    {
+      "dimension": "delivery",
+      "status": "passed_locally",
+      "evidence": [
+        "evidence/clean-harness/summary.json",
+        "examples/extract-deadline.json",
+        "README.md",
+        "docs/support-matrix.md"
+      ],
+      "external_gaps": [
+        "desktop screen recording"
+      ]
+    },
+    {
+      "dimension": "impact",
+      "status": "synthetic_only",
+      "evidence": [
+        "evidence/demo/report.json",
+        "evidence/demo/transcript.json"
+      ],
+      "metrics": {
+        "injected_failure_signature_count": 1,
+        "failed_case_count": 10,
+        "original_input_bytes": 73,
+        "reduced_input_bytes": 21,
+        "byte_reduction_ratio": 0.7123287671232876
+      },
+      "external_gaps": [
+        "authorized real-world schema and defect",
+        "independent developer reproduction",
+        "same-task manual efficiency comparison"
+      ]
+    },
+    {
+      "dimension": "technical_contribution",
+      "status": "passed_locally",
+      "evidence": [
+        "engine/",
+        "docs/architecture.md",
+        "evidence/local-harness/unit-tests.log"
+      ],
+      "external_gaps": []
+    }
+  ],
+  "competition": {
+    "official_url": "https://moonbitlang.github.io/Hackathon2026/",
+    "public_repository": "pending",
+    "registration": "not_performed",
+    "submission": "not_performed",
+    "deadline": "not confirmed by public notice",
+    "remote_ci": "configured_not_executed"
+  },
+  "ai": {
+    "tool": "Codex",
+    "review": "documented_self_review",
+    "human_understanding": "pending_participant_review"
+  },
+  "demo": {
+    "animation": "demo/MoonProbe-demo.gif",
+    "type": "rendered_actual_command_output",
+    "desktop_recording": "pending_not_claimed"
+  }
+}

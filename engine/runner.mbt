@@ -129,6 +129,9 @@ pub fn shrink(
   guard run_case(spec, c, version).failure is Some(signature) else {
     return { args: c.args, attempts: 0, reason: "not_failure", }
   }
+  if nodes(c.args) > 512 || byte_size(c.args) > 65536 {
+    return { args: c.args, attempts: 0, reason: "input_budget", }
+  }
   let mut best = c.args
   let mut attempts = 0
   while attempts < budget {
