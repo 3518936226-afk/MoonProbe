@@ -12,6 +12,7 @@ struct Config {
   out : String
   workload : String
   repeat : Int32
+  shrink_budget : Int32
 }
 
 ///|
@@ -54,6 +55,7 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
   let mut out = ""
   let mut workload = "generate"
   let mut repeat = 20
+  let mut shrink_budget = 100
   let mut i = 3
   if command == "replay" {
     if i >= argv.length() {
@@ -98,6 +100,15 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
           bad("--cases must be 1..200")
         }
       }
+      "--shrink-budget" => {
+        if command != "test" {
+          bad("--shrink-budget only supported by test")
+        }
+        shrink_budget = integer(v)
+        if shrink_budget < 1 || shrink_budget > 1000 {
+          bad("--shrink-budget must be 1..1000")
+        }
+      }
       "--out" => {
         if command != "test" {
           bad("--out only supported by test")
@@ -139,6 +150,7 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
     out,
     workload,
     repeat,
+    shrink_budget,
   }
 }
 
@@ -239,7 +251,7 @@ fn execute(c : Config) -> Int32 raise {
     "inspect" => {
       println(
         @engine.canonical({
-          "engine_version": "0.1.0",
+          "engine_version": "0.2.0",
           "mode": "offline_mock",
           "name": spec.name,
           "adapter_family": spec.adapter,
@@ -251,6 +263,7 @@ fn execute(c : Config) -> Int32 raise {
             "cases": 200,
             "generation_attempts": 2000,
             "shrink_attempts": 100,
+            "max_shrink_attempts": 1000,
             "string_codepoints": 1024,
             "array_items": 64,
             "file_bytes": 1048576,
@@ -260,9 +273,15 @@ fn execute(c : Config) -> Int32 raise {
       0
     }
     "test" => {
-      let report = @engine.test_report(spec, c.seed, c.cases, c.version)
+      let report = @engine.test_report(
+        spec,
+        c.seed,
+        c.cases,
+        c.version,
+        budget=c.shrink_budget,
+      )
       let corpus_text = @engine.canonical({
-        "format_version": 1,
+        "format_version": 2,
         "entries": @engine.field(report, "corpus"),
       })
       let report_text = @engine.canonical(report)
@@ -299,8 +318,9 @@ fn execute(c : Config) -> Int32 raise {
     }
     "replay" => {
       let corpus = read_json(c.corpus_path + "/entries.json")
-      if @engine.field(corpus, "format_version") != Json::number(1.0) {
-        bad("corpus envelope format_version must be 1")
+      if @engine.field(corpus, "format_version") != Json::number(1.0) &&
+        @engine.field(corpus, "format_version") != Json::number(2.0) {
+        bad("corpus envelope format_version must be 1 or 2")
       }
       guard @engine.field(corpus, "entries") is Array(entries) else {
         bad("corpus entries must be an array")
@@ -325,12 +345,12 @@ fn execute(c : Config) -> Int32 raise {
 fn main {
   let argv = @env.args()
   if argv.length() == 2 && argv[1] == "--version" {
-    println("MoonProbe 0.1.0")
+    println("MoonProbe 0.2.0")
     return
   }
   if argv.length() == 2 && argv[1] == "--help" {
     println(
-      "MoonProbe 0.1.0\ninspect <toolspec>\ntest <toolspec> --mock buggy|fixed --seed N --cases 1..200 --out DIR\nreplay <toolspec> <corpus-directory> --mock buggy|fixed\nbench <toolspec> --workload generate|execute|shrink --repeat 1..1000",
+      "MoonProbe 0.2.0\ninspect <toolspec>\ntest <toolspec> --mock buggy|fixed --seed N --cases 1..200 --out DIR\nreplay <toolspec> <corpus-directory> --mock buggy|fixed\nbench <toolspec> --workload generate|execute|shrink --repeat 1..1000",
     )
     return
   }

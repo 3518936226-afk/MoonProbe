@@ -14,6 +14,10 @@ pub fn canonical(@json.Json) -> String
 
 pub fn case_json(Case, Int32) -> @json.Json
 
+pub fn compile_schema(@json.Json) -> Schema raise ProbeError
+
+pub fn deep_smaller(@json.Json, @json.Json) -> Bool
+
 pub fn expected_json(Violation?) -> @json.Json
 
 pub fn failure_json(Failure) -> @json.Json
@@ -22,7 +26,17 @@ pub fn field(@json.Json, String) -> @json.Json
 
 pub fn generate(Spec, Int32, Int32) -> Array[Case] raise ProbeError
 
+pub fn generate_legacy(Spec, Int32, Int32) -> Array[Case] raise ProbeError
+
+pub fn generate_result(Spec, Int32, Int32) -> Generation raise ProbeError
+
+pub fn legacy_validate(@json.Json, @json.Json, path? : String) -> Violation?
+
 pub fn load_spec(@json.Json) -> Spec raise ProbeError
+
+pub fn local_adapter(String, String) -> Adapter
+
+pub fn next_float(Double, Bool) -> Double
 
 pub fn nodes(@json.Json) -> Int32
 
@@ -32,17 +46,27 @@ pub fn obj(@json.Json) -> Map[String, @json.Json]
 
 pub fn replay_report(Spec, Array[@json.Json], String) -> @json.Json raise ProbeError
 
+pub fn run_adapter(Spec, Case, Adapter) -> Outcome
+
 pub fn run_case(Spec, Case, String) -> Outcome
 
 pub fn sha256(String) -> String
 
 pub fn shrink(Spec, Case, String, budget? : Int32) -> ShrinkResult
 
-pub fn test_report(Spec, Int32, Int32, String) -> @json.Json raise ProbeError
+pub fn shrink_adapter(Spec, Case, Adapter, budget? : Int32) -> DeepShrink
+
+pub fn shrink_legacy(Spec, Case, String, budget? : Int32) -> ShrinkResult
+
+pub fn test_report(Spec, Int32, Int32, String, budget? : Int32) -> @json.Json raise ProbeError
 
 pub fn text(@json.Json) -> String
 
 pub fn validate(@json.Json, @json.Json, path? : String) -> Violation?
+
+pub fn validate_ir(Schema, @json.Json, path? : String) -> Violation?
+
+pub fn validation_count(Spec, Outcome) -> Int32
 
 // Errors
 pub(all) suberror ProbeError {
@@ -50,11 +74,30 @@ pub(all) suberror ProbeError {
 }
 
 // Types and methods
+pub(all) struct Adapter {
+  family : String
+  version : String
+  invoke : (@json.Json) -> Result[@json.Json, String]
+}
+
 pub(all) struct Case {
   index : Int32
   args : @json.Json
   category : String
   expected : Violation?
+}
+
+pub(all) struct DeepShrink {
+  args : @json.Json
+  attempts : Int32
+  reason : String
+  adapter_calls : Int32
+  validations : Int32
+  cache_hits : Int32
+  rejected_input : Int32
+  rejected_signature : Int32
+  rejected_size : Int32
+  trace : Array[@json.Json]
 }
 
 #derive(Eq)
@@ -64,9 +107,33 @@ pub(all) struct Failure {
   path : String
 }
 
+pub(all) struct Generation {
+  cases : Array[Case]
+  coverage : @json.Json
+  visited : Int32
+  duplicates : Int32
+  termination : String
+}
+
 pub(all) struct Outcome {
   failure : Failure?
   called : Bool
+}
+
+pub(all) struct Schema {
+  shape : Shape
+  choices : Array[@json.Json]?
+  source_path : String
+}
+
+pub(all) enum Shape {
+  Obj(Array[(String, Schema)], Array[String], Bool)
+  Arr(Schema, Int32, Int32?)
+  Str(Int32, Int32?)
+  Integral(Double?, Double?)
+  Real(Double?, Double?)
+  Boolean
+  Nil
 }
 
 pub(all) struct ShrinkResult {
@@ -78,6 +145,8 @@ pub(all) struct ShrinkResult {
 pub(all) struct Spec {
   name : String
   input : @json.Json
+  input_ir : Schema
+  output_ir : Schema?
   output : @json.Json?
   adapter : String
   fingerprint : String

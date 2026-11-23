@@ -38,12 +38,13 @@ try {
   & "$PSScriptRoot\build-native.ps1" -Test 2>&1 | Tee-Object -FilePath "$OutDir\test-build.log"
   Check 'native-test-build' $?
   $metadata = Get-Content '_build\native\release\test\engine\__whitebox_test_info.json' -Raw | ConvertFrom-Json
-  $number = $metadata.tests.'engine_wbtest.mbt'.Count
-  $unit = & "$ProjectRoot\work\engine-tests.exe" "engine_wbtest.mbt:0-$number"
+  $number=0; $selectors=@()
+  foreach($file in $metadata.tests.PSObject.Properties){$count=$file.Value.Count;$number+=$count;$selectors+="$($file.Name):0-$count"}
+  $unit = & "$ProjectRoot\work\engine-tests.exe" ($selectors -join '/')
   $unit | Set-Content "$OutDir\unit-tests.log" -Encoding utf8
   $results = @($unit | Where-Object { $_ -like '{*' } | ForEach-Object { $_ | ConvertFrom-Json } | Where-Object type -EQ 'result')
-  Check 'unit-results-count' ($results.Count -eq $number -and $number -ge 13)
-  foreach ($result in $results) { Check "unit-$($result.index)" ($result.message -eq '') }
+  Check 'unit-results-count' ($results.Count -eq $number -and $number -ge 25)
+  foreach ($result in $results) { Check "unit-$($result.file)-$($result.index)" ($result.message -eq '') }
   $spec = "$ProjectRoot\examples\extract-deadline.json"
   $null = Invoke-Probe 'inspect' @('inspect',$spec) 0
   $null = Invoke-Probe 'buggy' @('test',$spec,'--mock','buggy','--seed','20261123','--cases','32','--out',"$OutDir\buggy") 1
@@ -79,6 +80,15 @@ try {
   $corpus.entries[0].schema_fingerprint='mismatch'
   $corpus | ConvertTo-Json -Depth 40 -Compress | Set-Content "$OutDir\corrupt\entries.json" -Encoding utf8NoBOM
   $null = Invoke-Probe 'fingerprint-mismatch' @('replay',$spec,"$OutDir\corrupt",'--mock','fixed') 2
+  Check 'unique-inputs' (@($buggy.results | ForEach-Object {ConvertTo-Json -InputObject $_.case.args -Depth 40 -Compress} | Sort-Object -Unique).Count -eq $buggy.results.Count)
+  Check 'signature-groups' ($buggy.failure_signature_count -eq 1 -and $buggy.failure_groups[0].count -eq $buggy.failed)
+  Check 'full-call-cost' ($buggy.execution.total_adapter_calls -eq ($buggy.execution.main_adapter_calls+$buggy.execution.shrink_adapter_calls) -and $buggy.execution.shrink_adapter_calls -gt 0)
+  $null = Invoke-Probe 'shrink-budget' @('test',$spec,'--mock','buggy','--shrink-budget','1','--out',"$OutDir\budget-one") 1
+  $budget=Get-Content "$OutDir\budget-one\report.json" -Raw|ConvertFrom-Json
+  Check 'shrink-budget-enforced' (@($budget.corpus|Where-Object {$_.shrink.attempts -gt 1}).Count -eq 0)
+  $null = Invoke-Probe 'bad-shrink-budget' @('test',$spec,'--shrink-budget','1001','--out',"$OutDir\bad-budget") 2
+  $null = Invoke-Probe 'v1-replay-fixed' @('replay',$spec,"$ProjectRoot\fixtures\v1-corpus",'--mock','fixed') 0
+  $null = Invoke-Probe 'v1-replay-buggy' @('replay',$spec,"$ProjectRoot\fixtures\v1-corpus",'--mock','buggy') 1
   $null = Invoke-Probe 'no-overwrite' @('test',$spec,'--out',"$OutDir\fixed") 2
   'not a directory' | Set-Content "$OutDir\blocked-output" -Encoding utf8NoBOM
   $null = Invoke-Probe 'write-error' @('test',$spec,'--out',"$OutDir\blocked-output") 3

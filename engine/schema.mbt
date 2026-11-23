@@ -156,7 +156,7 @@ fn check_schema(s : Json, p : String, depth : Int32) -> Unit raise ProbeError {
     let plain = obj(s).copy()
     plain.remove("enum")
     for e in a {
-      if validate(Json::object(plain), e) is Some(_) {
+      if legacy_validate(Json::object(plain), e) is Some(_) {
         invalid(ptr(p, "enum"), "enum member violates declared type or bounds")
       }
     }
@@ -164,7 +164,11 @@ fn check_schema(s : Json, p : String, depth : Int32) -> Unit raise ProbeError {
 }
 
 ///|
-pub fn validate(s : Json, value : Json, path~ : String = "") -> Violation? {
+pub fn legacy_validate(
+  s : Json,
+  value : Json,
+  path~ : String = "",
+) -> Violation? {
   let t = text(field(s, "type"))
   if !type_is(t, value) {
     return Some({ code: "TYPE", path, })
@@ -183,7 +187,8 @@ pub fn validate(s : Json, value : Json, path~ : String = "") -> Violation? {
       let props = field(s, "properties")
       for k in keys(value) {
         if has(props, k) {
-          if validate(field(props, k), m[k], path=ptr(path, k)) is Some(v) {
+          if legacy_validate(field(props, k), m[k], path=ptr(path, k))
+            is Some(v) {
             return Some(v)
           }
         } else if field(s, "additionalProperties") == Json::boolean(false) {
@@ -200,7 +205,7 @@ pub fn validate(s : Json, value : Json, path~ : String = "") -> Violation? {
         return Some({ code: "MAX_ITEMS", path, })
       }
       for i, v in a {
-        if validate(field(s, "items"), v, path=ptr(path, i.to_string()))
+        if legacy_validate(field(s, "items"), v, path=ptr(path, i.to_string()))
           is Some(e) {
           return Some(e)
         }
@@ -267,7 +272,15 @@ pub fn load_spec(j : Json) -> Spec raise ProbeError {
     "input_schema": semantic(input),
     "output_schema": output.map(semantic).unwrap_or(Json::null()),
   }
-  { name, input, output, adapter, fingerprint: sha256(canonical(semantics)), }
+  {
+    name,
+    input,
+    output,
+    input_ir: build_ir(input, "/input_schema"),
+    output_ir: output.map(s => build_ir(s, "/output_schema")),
+    adapter,
+    fingerprint: sha256(canonical(semantics)),
+  }
 }
 
 ///|

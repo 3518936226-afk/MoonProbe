@@ -1,4 +1,4 @@
-param([switch]$Test)
+param([switch]$Test,[switch]$Oracle)
 . "$PSScriptRoot\env.ps1"
 Push-Location $ProjectRoot
 try {
@@ -8,7 +8,8 @@ try {
   }
   $mode = if ($Test) { 'test' } else { 'build' }
   $args = @($mode,'--target','native','--release','--dry-run')
-  if ($Test) { $args += 'engine' }
+  $target = if ($Test) { 'engine' } elseif ($Oracle) { 'cmd/oracle' } else { 'cmd/moonprobe' }
+  $args += $target
   $plan = & $Moon @args
   if ($LASTEXITCODE) { throw 'Compiler planning failed' }
   New-Item -ItemType Directory -Force -Path "$ProjectRoot\work\logs" | Out-Null
@@ -29,11 +30,11 @@ try {
   }
   # The official compiler unconditionally plans MSVC-only async runtime objects.
   # This synchronous CLI links the unmodified official runtime subset it uses.
-  $generated = if ($Test) { '_build\native\release\test\engine\engine.whitebox_test.c' } else { '_build\native\release\build\cmd\moonprobe\moonprobe.c' }
-  $out = if ($Test) { 'work\engine-tests.exe' } else { 'work\bin\moonprobe.exe' }
+  $generated = if ($Test) { '_build\native\release\test\engine\engine.whitebox_test.c' } elseif ($Oracle) { '_build\native\release\build\cmd\oracle\oracle.c' } else { '_build\native\release\build\cmd\moonprobe\moonprobe.c' }
+  $out = if ($Test) { 'work\engine-tests.exe' } elseif ($Oracle) { 'work\oracle.exe' } else { 'work\bin\moonprobe.exe' }
   New-Item -ItemType Directory -Force -Path (Split-Path $out -Parent) | Out-Null
   $sources = @($generated,"$env:MOON_HOME\lib\runtime\runtime.c","$env:MOON_HOME\lib\runtime\env.c","$env:MOON_HOME\lib\runtime\utf.c","$env:MOON_HOME\lib\runtime\backtrace.c")
-  if (!$Test) { $sources += 'cmd\moonprobe\native_io.c' }
+  if (!$Test) { $sources += $(if($Oracle){'cmd\oracle\native_io.c'}else{'cmd\moonprobe\native_io.c'}) }
   & $Gcc '-O2' '-fwrapv' '-fno-strict-aliasing' '-ffp-contract=off' '-DMOONBIT_ALLOCATOR=MOONBIT_ALLOCATOR_SYSTEM' "-I$env:MOON_HOME\include" @sources '-lm' '-o' $out
   if ($LASTEXITCODE) { throw 'Native linking failed' }
   Write-Output (Join-Path $ProjectRoot $out)

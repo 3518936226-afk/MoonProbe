@@ -10,6 +10,8 @@ pub(all) suberror ProbeError {
 pub(all) struct Spec {
   name : String
   input : Json
+  input_ir : Schema
+  output_ir : Schema?
   output : Json?
   adapter : String
   fingerprint : String

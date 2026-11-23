@@ -4,22 +4,49 @@ pub fn test_report(
   seed : Int32,
   count : Int32,
   version : String,
+  budget~ : Int32 = 100,
 ) -> Json raise ProbeError {
-  let cases = generate(spec, seed, count)
+  if budget < 1 || budget > 1000 {
+    raise Invalid("shrink budget must be 1..1000")
+  }
+  let generated = generate_result(spec, seed, count)
+  let cases = generated.cases
+  let adapter = local_adapter(spec.adapter, version)
   let results : Array[Json] = []
   let corpus : Array[Json] = []
-  let mut calls = 0
+  let groups : Map[String, Array[Int32]] = Map([])
+  let mut main_calls = 0
+  let mut shrink_calls = 0
+  let mut validations = 0
+  let mut hits = 0
   let mut failed = 0
+  let reduced_cache : Map[String, DeepShrink] = Map([])
   for c in cases {
-    let outcome = run_case(spec, c, version)
+    let outcome = run_adapter(spec, c, adapter)
     if outcome.called {
-      calls += 1
+      main_calls += 1
     }
-    let f = outcome.failure
+    validations += validation_count(spec, outcome)
     let mut details : Json = Json::null()
-    if f is Some(signature) {
+    if outcome.failure is Some(signature) {
       failed += 1
-      let reduced = shrink(spec, c, version)
+      let group = canonical(failure_json(signature))
+      if !groups.contains(group) {
+        groups[group] = []
+      }
+      groups[group].push(c.index)
+      let key = sha256(canonical(c.args) + canonical(expected_json(c.expected)))
+      let reduced = match reduced_cache.get(key) {
+        Some(r) => r
+        None => {
+          let r = shrink_adapter(spec, c, adapter, budget~)
+          reduced_cache[key] = r
+          shrink_calls += r.adapter_calls
+          validations += r.validations
+          hits += r.cache_hits
+          r
+        }
+      }
       details = {
         "attempts": reduced.attempts,
         "termination": reduced.reason,
@@ -29,9 +56,17 @@ pub fn test_report(
         "reduced_bytes": byte_size(reduced.args),
         "reduction_ratio": 1.0 -
         byte_size(reduced.args).to_double() / byte_size(c.args).to_double(),
+        "adapter_calls": reduced.adapter_calls,
+        "validations": reduced.validations,
+        "cache_hits": reduced.cache_hits,
+        "rejected_input": reduced.rejected_input,
+        "rejected_signature": reduced.rejected_signature,
+        "rejected_size": reduced.rejected_size,
+        "accepted_steps": reduced.trace,
       }
       corpus.push({
-        "format_version": 1,
+        "format_version": 2,
+        "generator_version": "coverage-v2",
         "tool_name": spec.name,
         "schema_fingerprint": spec.fingerprint,
         "adapter_family": spec.adapter,
@@ -49,26 +84,55 @@ pub fn test_report(
     results.push({
       "case": case_json(c, seed),
       "called": outcome.called,
-      "failure": f.map(failure_json).unwrap_or(Json::null()),
+      "failure": outcome.failure.map(failure_json).unwrap_or(Json::null()),
       "shrink": details,
     })
   }
+  let signatures = groups.keys().collect()
+  signatures.sort_by((a, b) => a.lexical_compare(b))
   {
-    "format_version": 1,
-    "engine_version": "0.1.0",
+    "format_version": 2,
+    "engine_version": "0.2.0",
+    "generator_version": "coverage-v2",
     "tool_name": spec.name,
     "schema_fingerprint": spec.fingerprint,
     "adapter_family": spec.adapter,
     "adapter_version": version,
     "seed": seed,
+    "requested_cases": count,
+    "generated_cases": cases.length(),
+    "generation": {
+      "visited": generated.visited,
+      "duplicates_removed": generated.duplicates,
+      "termination": generated.termination,
+    },
+    "coverage": generated.coverage,
     "budgets": {
       "cases": count,
       "generation_attempts": 2000,
-      "shrink_attempts_per_failure": 100,
+      "shrink_attempts_per_failure": budget,
     },
-    "passed": count - failed,
+    "passed": cases.length() - failed,
     "failed": failed,
-    "adapter_calls": calls,
+    "adapter_calls": main_calls,
+    "execution": {
+      "main_adapter_calls": main_calls,
+      "shrink_adapter_calls": shrink_calls,
+      "total_adapter_calls": main_calls + shrink_calls,
+      "validation_calls": validations,
+      "shrink_cache_hits": hits,
+    },
+    "failure_signature_count": signatures.length(),
+    "failure_groups": signatures.map(k => {
+      let row : Json = {
+        "signature": @json.parse(k) catch {
+          _ => Json::null()
+        },
+        "case_indices": groups[k],
+        "count": groups[k].length(),
+      }
+      row
+    }),
     "results": results,
     "corpus": corpus,
   }
@@ -100,7 +164,10 @@ pub fn replay_report(
   let mut failed = 0
   // Validate every entry first; incompatible corpora never produce partial verdicts.
   for e in entries {
-    if field(e, "format_version") != Json::number(1.0) ||
+    if (
+        field(e, "format_version") != Json::number(1.0) &&
+        field(e, "format_version") != Json::number(2.0)
+      ) ||
       text(field(e, "schema_fingerprint")) != spec.fingerprint ||
       text(field(e, "adapter_family")) != spec.adapter ||
       text(field(e, "tool_name")) != spec.name {
@@ -154,7 +221,7 @@ pub fn replay_report(
   }
   {
     "format_version": 1,
-    "engine_version": "0.1.0",
+    "engine_version": "0.2.0",
     "schema_fingerprint": spec.fingerprint,
     "adapter_family": spec.adapter,
     "adapter_version": version,
