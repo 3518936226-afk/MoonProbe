@@ -13,3 +13,7 @@ Tool: Codex. Date: 2026-11-23, Asia/Shanghai. Scope: Schema, generation, Runner,
 | Existing output could be overwritten or a path mishandled | Reused --out and Unicode path | Exclusive C writes, no-overwrite checks, UTF-16 Windows path conversion. CLI Harness cases cover them. |
 
 All accepted changes are rerun through the complete Harness before release. Source commits and final verification paths are listed in evidence/index.json. Human decisions, independent review and actual tool-user trials remain pending. No review model identifier beyond the known tool name is invented.
+
+Clean-directory reproduction found a compiler-plan portability issue: an external MOON_HOME is emitted as a symbolic shell variable and the compiler command is named moonc rather than a relative moonc.exe. The build script now expands only that known placeholder and binds the pinned compiler explicitly. Reproduced with a clean local clone and a shared pinned toolchain; complete Harness passed.
+
+The numeric shrink fixture was corrected from 4 to 40: changing one digit to another does not reduce canonical byte size and must not be accepted under the declared measure. H04 now uses a genuinely reducible numeric input and also verifies array reduction. H03 creates an alternate failure on a smaller candidate and verifies that the shrinker refuses it.

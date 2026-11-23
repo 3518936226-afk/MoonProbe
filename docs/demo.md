@@ -8,3 +8,5 @@
 6. Show Harness summary, benchmark raw samples, scope log and pending external evidence. Do not describe injected failures as real defects or local execution as independent human verification.
 
 A recorded terminal demonstration can be generated from the shipped executable. Its command transcript and recording must match the binary SHA-256 in the delivery manifest. A generated transcript video is not a live screen recording; label it accurately.
+
+The delivered GIF is explicitly labelled as rendered actual command output, not desktop capture. The desktop automation inventory did not expose a targetable demonstration window. A live WinForms helper is supplied for a later user-operated screen recording; that recording remains pending. The renderer uses Pillow and an existing Windows Consolas font and is not required by the CLI or Harness.
