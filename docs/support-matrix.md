@@ -22,3 +22,7 @@ Schema depth <=8. Worst-case generated input estimate <=512 structural nodes and
 1..200 cases per run; up to 2000 seeded-generation attempts; up to 100 shrink candidates per failed case. Candidate field order is lexical and canonical JSON ordering is deterministic. Null and false are distinct. Arrays are ordered. Equivalent textual number representations are normalized numerically.
 
 The extract_deadline example has an explicit date enum; date format validation is outside this subset. echo is a built-in synthetic identity adapter used to check contracts without an output schema. No network and no credentials are needed after build.
+
+## v0.2 generation and reduction budgets
+
+The 200-case limit is an upper bound on unique cases. At most 2000 candidate visits and 2000 witness obligations are accepted; over-large catalogues fail explicitly. Produced cases remain within 512 nodes and 65536 bytes; an out-of-budget witness stays uncovered with a reason. Full report/corpus files must each fit 1 MiB. Shrink visits default to 100 and can be configured to 1000; these include duplicate and rejected candidates, unlike the legacy accepted-size-only counter. Enum complements and optional-presence pairwise limits are described in v0.2-design.md.

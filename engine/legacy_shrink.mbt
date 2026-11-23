@@ -77,7 +77,7 @@ pub fn shrink_legacy_adapter(
       }
       attempts += 1
       // Preserve the original input expectation before testing execution failures.
-      if validate(spec.input, candidate) != c.expected {
+      if validate_ir(spec.input_ir, candidate) != c.expected {
         continue
       }
       let trial : Case = {

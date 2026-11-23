@@ -1,4 +1,4 @@
-name: Native P0 Harness
+name: Native core and independent verification
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
@@ -7,19 +7,21 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: x64
       - name: Install content-pinned MoonBit
         shell: pwsh
         run: ./scripts/install-toolchain.ps1
-      - name: Run same local Harness
+      - name: Install hash-pinned development oracle
         shell: pwsh
-        run: ./scripts/harness.ps1 -OutDir "$env:GITHUB_WORKSPACE/work/ci"
-      - name: Collect benchmark
+        run: ./scripts/setup-depth.ps1 -Python (Get-Command python.exe).Source
+      - name: Same Native, differential, mutation and benchmark gates
         shell: pwsh
-        run: ./scripts/benchmark.ps1 -OutDir "$env:GITHUB_WORKSPACE/work/benchmark"
+        run: ./scripts/verify-all.ps1 -Python (Get-Command python.exe).Source -OutDir "$env:GITHUB_WORKSPACE/work/ci"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: native-evidence
-          path: |
-            work/ci
-            work/benchmark
+          name: native-depth-evidence
+          path: work/ci

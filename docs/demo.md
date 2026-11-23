@@ -10,3 +10,5 @@
 A recorded terminal demonstration can be generated from the shipped executable. Its command transcript and recording must match the binary SHA-256 in the delivery manifest. A generated transcript video is not a live screen recording; label it accurately.
 
 The delivered GIF is explicitly labelled as rendered actual command output, not desktop capture. The desktop automation inventory did not expose a targetable demonstration window. A live WinForms helper is supplied for a later user-operated screen recording; that recording remains pending. The renderer uses Pillow and an existing Windows Consolas font and is not required by the CLI or Harness.
+
+For v0.2, show requested/generated unique counts, covered/eligible/uncovered targets, failure_signature_count and execution.total_adapter_calls. Run bench --workload compare to show old/new middle-substring, same-byte numeric and array interval reductions. Report quality and cost together, including scenarios where the new method uses more calls. Historical v1 corpus compatibility is part of the Native Harness.

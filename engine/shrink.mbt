@@ -59,18 +59,8 @@ pub fn deep_smaller(a : Json, b : Json) -> Bool {
 }
 
 ///|
-pub fn validation_count(spec : Spec, o : Outcome) -> Int32 {
-  if o.failure is Some(f) && f.code == "FAMILY_MISMATCH" {
-    return 0
-  }
-  1 +
-  (if o.called &&
-    spec.output_ir is Some(_) &&
-    !(o.failure is Some(f) && f.stage == "ADAPTER") {
-    1
-  } else {
-    0
-  })
+pub fn validation_count(_spec : Spec, o : Outcome) -> Int32 {
+  o.validations
 }
 
 ///|

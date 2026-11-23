@@ -167,6 +167,17 @@ pub fn next_float(n : Double, up : Bool) -> Double {
 }
 
 ///|
+fn goal_id(source : String, p : String, rule : String, kind : String) -> String {
+  let key : Json = {
+    "schema_path": source,
+    "path": p,
+    "rule": rule,
+    "kind": kind,
+  }
+  sha256(canonical(key))
+}
+
+///|
 fn offer(
   jobs : Array[Job],
   s : Schema,
@@ -180,7 +191,7 @@ fn offer(
   let p = path_text(trail)
   let expected = if negative { Some({ code: rule, path: p, }) } else { None }
   jobs.push({
-    id: s.source_path + "|" + p + "|" + rule + "|" + kind,
+    id: goal_id(s.source_path, p, rule, kind),
     schema_path: s.source_path,
     path: p,
     rule,
@@ -233,6 +244,7 @@ fn jobs_for(spec : Spec) -> (Array[Job], Array[Json]) {
       let mut outside : Json? = None
       let plain : Schema = {
         shape: s.shape,
+        properties: s.properties,
         choices: None,
         source_path: s.source_path,
       }
@@ -246,14 +258,20 @@ fn jobs_for(spec : Spec) -> (Array[Job], Array[Json]) {
       if outside is Some(v) {
         offer(jobs, s, trail, context, v, "ENUM", "outside", true)
       } else {
+        let enum_values : Map[String, Bool] = Map([])
+        for v in a {
+          enum_values[canonical(v)] = true
+        }
+        let proven = finite_size(plain) is Some(n) && enum_values.length() == n
         excluded.push({
           "schema_path": s.source_path,
           "path": path_text(trail),
           "rule": "ENUM",
           "kind": "outside",
-          "status": match s.shape {
-            Boolean | Nil => "not_applicable"
-            _ => "uncovered"
+          "status": if proven {
+            "not_applicable"
+          } else {
+            "uncovered"
           },
           "reason": "no_complement_found_in_128_candidates",
         })
@@ -268,7 +286,7 @@ fn jobs_for(spec : Spec) -> (Array[Job], Array[Json]) {
             let t = child_trail(trail, k)
             let p = path_text(t)
             jobs.push({
-              id: sub.source_path + "|REQUIRED",
+              id: goal_id(s.source_path, p, "REQUIRED", "missing"),
               schema_path: sub.source_path,
               path: p,
               rule: "REQUIRED",
@@ -297,7 +315,7 @@ fn jobs_for(spec : Spec) -> (Array[Job], Array[Json]) {
           }
           let p = ptr(path_text(trail), key)
           jobs.push({
-            id: s.source_path + "|ADDITIONAL_PROPERTIES",
+            id: goal_id(s.source_path, p, "ADDITIONAL_PROPERTIES", "extra"),
             schema_path: s.source_path,
             path: p,
             rule: "ADDITIONAL_PROPERTIES",
@@ -555,7 +573,24 @@ pub fn generate_result(
   if count < 1 || count > 200 || seed < 0 {
     raise Invalid("cases must be 1..200 and seed nonnegative")
   }
-  let (jobs, excluded) = jobs_for(spec)
+  let (raw_jobs, raw_excluded) = jobs_for(spec)
+  let jobs : Array[Job] = []
+  let ids : Map[String, Bool] = Map([])
+  for job in raw_jobs {
+    if !ids.contains(job.id) {
+      ids[job.id] = true
+      jobs.push(job)
+    }
+  }
+  let excluded : Array[Json] = []
+  let facts : Map[String, Bool] = Map([])
+  for fact in raw_excluded {
+    let key = canonical(fact)
+    if !facts.contains(key) {
+      facts[key] = true
+      excluded.push(fact)
+    }
+  }
   if jobs.length() > 2000 {
     raise Invalid("GOAL_BUDGET exceeds 2000 obligations")
   }
@@ -595,6 +630,19 @@ pub fn generate_result(
     if visited < 2000 {
       visited += 1
       let v = (job.make)()
+      if nodes(v) > 512 || byte_size(v) > 65536 {
+        goals.push({
+          "id": job.id,
+          "schema_path": job.schema_path,
+          "path": job.path,
+          "rule": job.rule,
+          "kind": job.kind,
+          "status": "uncovered",
+          "reason": "case_resource_budget",
+          "case_index": null,
+        })
+        continue
+      }
       let observed = validate_ir(spec.input_ir, v)
       if observed != job.expected {
         raise Invalid("ENGINE_EXPECTATION_MISMATCH " + job.id)
@@ -612,6 +660,8 @@ pub fn generate_result(
           args: v,
           category: if job.expected is Some(_) {
             "invalid"
+          } else if job.kind == "baseline" {
+            "valid"
           } else {
             "boundary"
           },

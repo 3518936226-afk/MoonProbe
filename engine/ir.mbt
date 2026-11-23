@@ -12,6 +12,7 @@ pub(all) enum Shape {
 ///|
 pub(all) struct Schema {
   shape : Shape
+  properties : Map[String, Schema]
   choices : Array[Json]?
   source_path : String
 }
@@ -59,6 +60,10 @@ fn build_ir(s : Json, p : String) -> Schema {
   }
   {
     shape,
+    properties: match shape {
+      Obj(props, _, _) => Map(props)
+      _ => Map([])
+    },
     choices: if has(s, "enum") {
       Some(arr(field(s, "enum")))
     } else {
@@ -101,15 +106,15 @@ pub fn validate_ir(s : Schema, v : Json, path~ : String = "") -> Violation? {
     return Some({ code: "ENUM", path, })
   }
   match (s.shape, v) {
-    (Obj(props, required, extra), Object(m)) => {
+    (Obj(_, required, extra), Object(m)) => {
       for k in required {
         if !m.contains(k) {
           return Some({ code: "REQUIRED", path: ptr(path, k), })
         }
       }
       for k in keys(v) {
-        let child = props.filter(x => x.0 == k).get(0)
-        if child is Some((_, sub)) {
+        let child = s.properties.get(k)
+        if child is Some(sub) {
           if validate_ir(sub, m[k], path=ptr(path, k)) is Some(e) {
             return Some(e)
           }

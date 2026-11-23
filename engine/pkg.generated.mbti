@@ -58,6 +58,8 @@ pub fn shrink_adapter(Spec, Case, Adapter, budget? : Int32) -> DeepShrink
 
 pub fn shrink_legacy(Spec, Case, String, budget? : Int32) -> ShrinkResult
 
+pub fn shrink_legacy_adapter(Spec, Case, Adapter, budget? : Int32) -> ShrinkResult
+
 pub fn test_report(Spec, Int32, Int32, String, budget? : Int32) -> @json.Json raise ProbeError
 
 pub fn text(@json.Json) -> String
@@ -118,10 +120,12 @@ pub(all) struct Generation {
 pub(all) struct Outcome {
   failure : Failure?
   called : Bool
+  validations : Int32
 }
 
 pub(all) struct Schema {
   shape : Shape
+  properties : Map[String, Schema]
   choices : Array[@json.Json]?
   source_path : String
 }

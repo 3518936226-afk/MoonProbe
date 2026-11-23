@@ -1,20 +1,21 @@
 {
-  "format_version": 1,
-  "release": "0.1.0",
-  "commit_binding": "manifest.json source_commit and raw summary.json source_commit",
+  "format_version": 2,
+  "release": "0.2.0",
+  "commit_binding": "manifest.json source_commit; each raw verification summary records its source_commit",
   "dimensions": [
     {
       "dimension": "engineering",
       "status": "passed_locally",
       "evidence": [
         "evidence/local-harness/summary.json",
-        "evidence/local-harness/unit-tests.log",
+        "evidence/independent/summary.json",
+        "evidence/mutations/summary.json",
         "evidence/benchmark/summary.json",
         "docs/ai-review.md"
       ],
       "external_gaps": [
-        "remote CI run identifier/link",
-        "human review sign-off"
+        "remote CI execution",
+        "participant human sign-off"
       ]
     },
     {
@@ -23,11 +24,11 @@
       "evidence": [
         "evidence/clean-harness/summary.json",
         "examples/extract-deadline.json",
-        "README.md",
+        "fixtures/v1-corpus/entries.json",
         "docs/support-matrix.md"
       ],
       "external_gaps": [
-        "desktop screen recording"
+        "live desktop screen recording"
       ]
     },
     {
@@ -37,17 +38,10 @@
         "evidence/demo/report.json",
         "evidence/demo/transcript.json"
       ],
-      "metrics": {
-        "injected_failure_signature_count": 1,
-        "failed_case_count": 10,
-        "original_input_bytes": 73,
-        "reduced_input_bytes": 21,
-        "byte_reduction_ratio": 0.7123287671232876
-      },
       "external_gaps": [
-        "authorized real-world schema and defect",
+        "authorized real-world defect",
         "independent developer reproduction",
-        "same-task manual efficiency comparison"
+        "measured manual-task comparison"
       ]
     },
     {
@@ -55,19 +49,27 @@
       "status": "passed_locally",
       "evidence": [
         "engine/",
-        "docs/architecture.md",
-        "evidence/local-harness/unit-tests.log"
+        "docs/v0.2-design.md",
+        "evidence/benchmark/comparison.json",
+        "evidence/independent/official-selected.json",
+        "evidence/independent/official-excluded.json"
       ],
       "external_gaps": []
     }
   ],
+  "core_verification": {
+    "reference": "jsonschema 4.26.0 Draft202012Validator",
+    "suite_commit": "e2a68a15cd490750fd6b95e604e4054d7d978d1f",
+    "differential_schemas": 100,
+    "differential_pairs": 10000,
+    "defined_source_mutations": 12,
+    "scope": "Only declared subset and bounded representations; not full JSON Schema conformance"
+  },
   "competition": {
-    "official_url": "https://moonbitlang.github.io/Hackathon2026/",
     "public_repository": "pending",
+    "remote_ci": "configured_not_executed",
     "registration": "not_performed",
-    "submission": "not_performed",
-    "deadline": "not confirmed by public notice",
-    "remote_ci": "configured_not_executed"
+    "submission": "not_performed"
   },
   "ai": {
     "tool": "Codex",

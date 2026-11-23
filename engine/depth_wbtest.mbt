@@ -334,3 +334,178 @@ test "D08 grouping retains distinct original inputs and reports cost" {
     )
   }
 }
+
+///|
+test "D09 stable unique goal identities include array positions" {
+  let spec = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": { "type": "integer" },
+              "__extra__": { "type": "null" },
+            },
+            "required": ["x", "__extra__"],
+            "additionalProperties": false,
+          },
+          "minItems": 3,
+          "maxItems": 3,
+        },
+      },
+      "required": ["a"],
+      "additionalProperties": false,
+    },
+  })
+  let result = generate_result(spec, 7, 200)
+  let seen : Map[String, Bool] = Map([])
+  for goal in arr(field(result.coverage, "targets")) {
+    let id = text(field(goal, "id"))
+    assert_false(seen.contains(id))
+    seen[id] = true
+  }
+  assert_true(
+    result.cases.any(c => c.expected is Some(v) && v.path == "/a/1/x"),
+  )
+  for c in result.cases {
+    assert_true(validate_ir(spec.input_ir, c.args) == c.expected)
+  }
+}
+
+///|
+test "D10 reordered properties preserve generation and seeds diversify exploration" {
+  let first = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "b": { "type": "string", "maxLength": 20 },
+        "a": { "type": "integer", "minimum": 0, "maximum": 100 },
+      },
+      "required": ["a"],
+      "additionalProperties": false,
+    },
+  })
+  let second = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": {
+      "additionalProperties": false,
+      "required": ["a"],
+      "properties": {
+        "a": { "maximum": 100, "type": "integer", "minimum": 0 },
+        "b": { "maxLength": 20, "type": "string" },
+      },
+      "type": "object",
+    },
+  })
+  @debug.assert_eq(first.fingerprint, second.fingerprint)
+  let a = generate(first, 9, 200)
+  let b = generate(second, 9, 200)
+  let c = generate(first, 10, 200)
+  @debug.assert_eq(a.length(), b.length())
+  let mut changed = false
+  for i, x in a {
+    @debug.assert_eq(canonical(case_json(x, 9)), canonical(case_json(b[i], 9)))
+    if canonical(x.args) != canonical(c[i].args) {
+      changed = true
+    }
+  }
+  assert_true(changed)
+}
+
+///|
+test "D11 candidate construction respects per-case resource cap" {
+  let inner : Map[String, Json] = Map([])
+  for i = 0; i < 6; i = i + 1 {
+    inner["k" + i.to_string()] = { "type": "null" }
+  }
+  let props : Map[String, Json] = Map([])
+  props["a"] = {
+    "type": "array",
+    "items": { "type": "object", "properties": Json::object(inner) },
+    "maxItems": 64,
+  }
+  for i = 0; i < 62; i = i + 1 {
+    props["tail" + i.to_string()] = { "type": "null" }
+  }
+  let spec = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": {
+      "type": "object",
+      "properties": Json::object(props),
+      "additionalProperties": false,
+    },
+  })
+  let g = generate_result(spec, 9, 200)
+  for c in g.cases {
+    assert_true(nodes(c.args) <= 512)
+    assert_true(byte_size(c.args) <= 65536)
+  }
+  assert_true(
+    arr(field(g.coverage, "targets")).any(x => {
+      text(field(x, "reason")) == "case_resource_budget"
+    }),
+  )
+}
+
+///|
+test "D12 measured validation counts do not depend on adapter error text" {
+  let spec = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": {
+      "type": "object",
+      "properties": { "n": { "type": "integer" } },
+      "required": ["n"],
+    },
+  })
+  let mut actual_calls = 0
+  let adapter : Adapter = {
+    family: "echo",
+    version: "injected",
+    invoke: _ => {
+      actual_calls += 1
+      Err("FAMILY_MISMATCH")
+    },
+  }
+  let negative : Case = {
+    index: 0,
+    args: {},
+    category: "invalid",
+    expected: Some({ code: "REQUIRED", path: "/n", }),
+  }
+  let rejected = run_adapter(spec, negative, adapter)
+  @debug.assert_eq(actual_calls, 0)
+  @debug.assert_eq(rejected.validations, 1)
+  assert_false(rejected.called)
+  let positive : Case = {
+    index: 0,
+    args: { "n": 1 },
+    category: "valid",
+    expected: None,
+  }
+  let outcome = run_adapter(spec, positive, adapter)
+  @debug.assert_eq(actual_calls, 1)
+  @debug.assert_eq(outcome.validations, 1)
+  assert_true(outcome.called)
+  let wrong : Adapter = {
+    family: "other",
+    version: "injected",
+    invoke: _ => {
+      actual_calls += 1
+      Ok({})
+    },
+  }
+  let blocked = run_adapter(spec, positive, wrong)
+  @debug.assert_eq(actual_calls, 1)
+  @debug.assert_eq(blocked.validations, 0)
+  assert_false(blocked.called)
+}

@@ -1,6 +1,6 @@
 # Architecture
 
-The engine is MoonBit. model.mbt defines Spec, Case, Violation, Failure, Outcome and ShrinkResult. schema.mbt compiles a checked JSON-backed subset IR: unsupported keys and contradictory/resource-exceeding schemas are rejected before generation. The JSON representation is retained for inspect and traceability; this release does not claim a separate general-purpose JSON Schema AST library.
+The engine is MoonBit. model.mbt defines Spec, Case, Violation, Failure, Outcome and ShrinkResult. schema.mbt rejects unsupported or resource-exceeding schemas, then ir.mbt builds typed Schema/Shape nodes with direct object lookup. Raw JSON remains only for display and the legacy-compatible fingerprint. See v0.2-design.md for the new generator and reducer.
 
 generator.mbt produces a legal baseline, positive boundaries, single-point mutations and xorshift32-seeded legal samples. Properties are processed in lexical UTF-16 key order. Repeated legal inputs are permitted when filling a requested case budget; index distinguishes cases. It is not a coverage guarantee. Scalar enum enumeration makes the demo leap-day case reproducible without a date-specific generator.
 
@@ -17,3 +17,5 @@ cmd/moonprobe contains strict CLI parsing, IO and benchmark scheduling. native_i
 The MinGW build calls the pinned official compiler's package/link plan, then GCC links generated C plus official runtime.c, env.c, utf.c and backtrace.c unchanged. The entire async runtime is not needed by this program. The same route builds the official MoonBit native test driver; the Harness checks every result message and count because the driver's process exit code alone is not an assertion summary.
 
 Native CI is configured to use the same Harness. Other backends and OS combinations are unvalidated. No real execution, external process adapter, MCP transport or HTTP runtime is exposed.
+
+The v0.2 design document supersedes v0.1 descriptions of candidate filling, reduction ranking and counting. Legacy code is retained only as an explicitly labelled comparison baseline.

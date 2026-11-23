@@ -43,13 +43,14 @@ pub fn run_adapter(spec : Spec, c : Case, adapter : Adapter) -> Outcome {
     return {
       failure: Some({ stage: "ADAPTER", code: "FAMILY_MISMATCH", path: "", }),
       called: false,
+      validations: 0,
     }
   }
   let input_error = validate_ir(spec.input_ir, c.args)
   match c.expected {
     Some(want) => {
       if input_error == Some(want) {
-        return { failure: None, called: false, }
+        return { failure: None, called: false, validations: 1, }
       }
       return {
         failure: Some({
@@ -58,6 +59,7 @@ pub fn run_adapter(spec : Spec, c : Case, adapter : Adapter) -> Outcome {
           path: want.path,
         }),
         called: false,
+        validations: 1,
       }
     }
     None =>
@@ -65,6 +67,7 @@ pub fn run_adapter(spec : Spec, c : Case, adapter : Adapter) -> Outcome {
         return {
           failure: Some({ stage: "INPUT_SCHEMA", code: e.code, path: e.path, }),
           called: false,
+          validations: 1,
         }
       }
   }
@@ -73,7 +76,8 @@ pub fn run_adapter(spec : Spec, c : Case, adapter : Adapter) -> Outcome {
     Err(code) =>
       return {
         failure: Some({ stage: "ADAPTER", code, path: "", }),
-        called: code != "UNREGISTERED_VERSION",
+        called: true,
+        validations: 1,
       }
   }
   if spec.output_ir is Some(schema) {
@@ -81,10 +85,19 @@ pub fn run_adapter(spec : Spec, c : Case, adapter : Adapter) -> Outcome {
       return {
         failure: Some({ stage: "OUTPUT_SCHEMA", code: e.code, path: e.path, }),
         called: true,
+        validations: 2,
       }
     }
   }
-  { failure: None, called: true, }
+  {
+    failure: None,
+    called: true,
+    validations: if spec.output_ir is Some(_) {
+      2
+    } else {
+      1
+    },
+  }
 }
 
 ///|

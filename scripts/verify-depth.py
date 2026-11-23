@@ -7,7 +7,7 @@ OUT=pathlib.Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'work'/'depth-verific
 OUT.mkdir(parents=True,exist_ok=False)
 R=random.Random(20261123)
 EXE=ROOT/'work'/'bin'/'moonprobe.exe'; ORACLE=ROOT/'work'/'oracle.exe'
-SUITE=ROOT/'work'/'schema-suite'
+SUITE=ROOT/'fixtures'/'upstream'/'schema-suite'
 def dump(p,x):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(x,ensure_ascii=True,separators=(',',':')),encoding='utf-8')
 def scalar_data_ok(x):
     if isinstance(x,str):return not any(0xd800<=ord(c)<=0xdfff for c in x)
@@ -141,6 +141,6 @@ for si,s in enumerate(schemas):
         assert key not in seen;seen.add(key)
         assert validator.is_valid(c['args'])==(c['expected'] is None),(si,c)
     generated+=len(seen);unique_total+=len(seen)
-summary={'status':'passed','seed':20261123,'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'reference':'jsonschema 4.26.0 Draft202012Validator','suite_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=SUITE,text=True).strip(),'official_selected':len(official),'official_excluded':len(excluded),'official_exclusion_reasons':dict(collections.Counter(x['reason'] for x in excluded)),'official_source_sha256':file_hashes,'differential_schemas':len(schemas),'differential_pairs':len(rows),'generated_unique_inputs':generated,'mismatches':0}
+summary={'status':'passed','seed':20261123,'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'reference':'jsonschema 4.26.0 Draft202012Validator','suite_commit':json.loads((SUITE/'PINNED.json').read_text(encoding='utf-8'))['commit'],'official_selected':len(official),'official_excluded':len(excluded),'official_exclusion_reasons':dict(collections.Counter(x['reason'] for x in excluded)),'official_source_sha256':file_hashes,'differential_schemas':len(schemas),'differential_pairs':len(rows),'generated_unique_inputs':generated,'mismatches':0}
 dump(OUT/'summary.json',summary)
 print(json.dumps(summary,ensure_ascii=True))

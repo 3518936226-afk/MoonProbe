@@ -119,7 +119,8 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
         out = v
       }
       "--workload" => {
-        if command != "bench" || !["generate", "execute", "shrink"].contains(v) {
+        if command != "bench" ||
+          !["generate", "execute", "shrink", "compare"].contains(v) {
           bad("bench workload must be generate, execute or shrink")
         }
         workload = v
@@ -176,6 +177,9 @@ fn benchmark(
   workload : String,
   repeat : Int32,
 ) -> Json raise @engine.ProbeError {
+  if workload == "compare" {
+    return compare_algorithms(spec, repeat)
+  }
   let cases = @engine.generate(spec, 20261123, 200)
   let failing = cases
     .filter(c => @engine.run_case(spec, c, "buggy").failure is Some(_))

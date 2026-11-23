@@ -11,3 +11,11 @@
 2026-11-23: Git history is local, with AI-authored commits explicitly attributed to Codex. Public repository creation, uploads, remote CI, competition registration and human review have not been performed. Source and CI configuration are prepared locally.
 
 2026-11-23: Synthetic extract_deadline and echo fixtures only. No claim of a real-world defect, independent human reproduction or speedup over manual testing. Those evidence categories remain pending.
+
+## v0.2 core depth
+
+The user selected algorithm quality and reliability. Scope: typed IR, independent local adapter interface, unique deterministic coverage witnesses, optional sibling pairwise presence, bounded ddmin-style shrinking, explicit costs and v1/v2 corpus replay. No new real-tool transport, LLM semantics or UI product is added. --cases now means an upper bound; reports explain short runs.
+
+The independent oracle is development-only, pinned to jsonschema 4.26.0 with Windows Python 3.12 wheel hashes. Upstream fixtures are vendored verbatim at a fixed commit with their MIT license. A filtered subset and an exclusion ledger are produced; unsupported data is not silently relabelled. Source mutations run only in D-drive scratch copies.
+
+The first comparative run found 197 unique inputs in 200 legacy cases versus 200 unique v0.2 inputs. The middle-substring case reduced from the legacy 42-byte retained input to a 14-byte input; the array case reached 15 bytes versus 27 within equal 100-visit settings, with calls 14 versus 75. Legacy visit counters count fewer categories, so these counters are not presented as equal-work guarantees. Timings and actual callback counts remain separately recorded.

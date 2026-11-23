@@ -44,6 +44,7 @@ pub(all) struct Failure {
 pub(all) struct Outcome {
   failure : Failure?
   called : Bool
+  validations : Int32
 }
 
 ///|
