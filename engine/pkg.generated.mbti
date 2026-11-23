@@ -1,0 +1,94 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonprobe/moonprobe/engine"
+
+import {
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn arr(@json.Json) -> Array[@json.Json]
+
+pub fn byte_size(@json.Json) -> Int32
+
+pub fn canonical(@json.Json) -> String
+
+pub fn case_json(Case, Int32) -> @json.Json
+
+pub fn expected_json(Violation?) -> @json.Json
+
+pub fn failure_json(Failure) -> @json.Json
+
+pub fn field(@json.Json, String) -> @json.Json
+
+pub fn generate(Spec, Int32, Int32) -> Array[Case] raise ProbeError
+
+pub fn load_spec(@json.Json) -> Spec raise ProbeError
+
+pub fn nodes(@json.Json) -> Int32
+
+pub fn num(@json.Json) -> Double
+
+pub fn obj(@json.Json) -> Map[String, @json.Json]
+
+pub fn replay_report(Spec, Array[@json.Json], String) -> @json.Json raise ProbeError
+
+pub fn run_case(Spec, Case, String) -> Outcome
+
+pub fn sha256(String) -> String
+
+pub fn shrink(Spec, Case, String, budget? : Int32) -> ShrinkResult
+
+pub fn test_report(Spec, Int32, Int32, String) -> @json.Json raise ProbeError
+
+pub fn text(@json.Json) -> String
+
+pub fn validate(@json.Json, @json.Json, path? : String) -> Violation?
+
+// Errors
+pub(all) suberror ProbeError {
+  Invalid(String)
+}
+
+// Types and methods
+pub(all) struct Case {
+  index : Int32
+  args : @json.Json
+  category : String
+  expected : Violation?
+}
+
+#derive(Eq)
+pub(all) struct Failure {
+  stage : String
+  code : String
+  path : String
+}
+
+pub(all) struct Outcome {
+  failure : Failure?
+  called : Bool
+}
+
+pub(all) struct ShrinkResult {
+  args : @json.Json
+  attempts : Int32
+  reason : String
+}
+
+pub(all) struct Spec {
+  name : String
+  input : @json.Json
+  output : @json.Json?
+  adapter : String
+  fingerprint : String
+}
+
+#derive(Eq)
+pub(all) struct Violation {
+  code : String
+  path : String
+}
+
+// Type aliases
+
+// Traits
