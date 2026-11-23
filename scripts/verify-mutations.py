@@ -18,7 +18,7 @@ RULES=[
  ('M12_fingerprint','engine/report.mbt','text(field(e, "schema_fingerprint")) != spec.fingerprint','false'),
 ]
 summary=[]
-env=os.environ.copy();env['MOON_HOME']=str(ROOT/'toolchain');env['TEMP']=str(ROOT/'work'/'tmp');env['TMP']=env['TEMP']
+env=os.environ.copy();env['MOON_HOME']=os.environ.get('MOON_HOME',str(ROOT/'toolchain'));env['TEMP']=str(ROOT/'work'/'tmp');env['TMP']=env['TEMP']
 for identifier,file,old,new in RULES:
     scratch=OUT/identifier;scratch.mkdir()
     for folder in ['engine','cmd','scripts']:shutil.copytree(ROOT/folder,scratch/folder)

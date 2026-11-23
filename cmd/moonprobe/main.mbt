@@ -354,7 +354,7 @@ fn main {
   }
   if argv.length() == 2 && argv[1] == "--help" {
     println(
-      "MoonProbe 0.2.0\ninspect <toolspec>\ntest <toolspec> --mock buggy|fixed --seed N --cases 1..200 --out DIR\nreplay <toolspec> <corpus-directory> --mock buggy|fixed\nbench <toolspec> --workload generate|execute|shrink --repeat 1..1000",
+      "MoonProbe 0.2.0\ninspect <toolspec>\ntest <toolspec> --mock buggy|fixed --seed N --cases 1..200 --shrink-budget 1..1000 --out DIR\nreplay <toolspec> <corpus-directory> --mock buggy|fixed\nbench <toolspec> --workload generate|execute|shrink|compare --repeat 1..1000",
     )
     return
   }
