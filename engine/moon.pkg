@@ -3,4 +3,6 @@ import {
   "moonbitlang/core/encoding/utf8",
 }
 
-import { "moonbitlang/core/test" } for "wbtest"
+import {
+  "moonbitlang/core/debug",
+} for "wbtest"

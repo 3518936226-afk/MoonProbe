@@ -5,5 +5,9 @@ import {
   "moonbitlang/core/bench",
   "moonbitlang/core/encoding/utf8",
 }
+
 pkgtype(kind: "executable")
-options("native-stub": ["native_io.c"])
+
+options(
+  "native-stub": [ "native_io.c" ],
+)
