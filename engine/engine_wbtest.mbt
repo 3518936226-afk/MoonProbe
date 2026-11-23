@@ -527,18 +527,25 @@ test "R02 unknown mock version cannot silently act fixed" {
 
 ///|
 test "H05 oversized manual input keeps original without shrinking" {
-  let spec = demo()
+  let spec = load_spec({
+    "name": "echo",
+    "adapter_id": "echo",
+    "input_schema": { "type": "object" },
+    "output_schema": {
+      "type": "object",
+      "properties": { "missing": { "type": "string" } },
+      "required": ["missing"],
+    },
+  })
   let c : Case = {
     index: 0,
-    args: {
-      "date": "2024-02-29",
-      "context": "",
-      "options": { "tags": [] },
-      "unused": Json::string(String::make(70000, 'x')),
-    },
+    args: { "unused": Json::string(String::make(70000, 'x')) },
     category: "manual",
     expected: None,
   }
-  let reduced = shrink(spec, c, "buggy")
+  assert_true(run_case(spec, c, "fixed").failure is Some(_))
+  let reduced = shrink(spec, c, "fixed")
   @debug.assert_eq(reduced.attempts, 0)
+  @debug.assert_eq(reduced.reason, "input_budget")
+  @debug.assert_eq(byte_size(reduced.args), byte_size(c.args))
 }

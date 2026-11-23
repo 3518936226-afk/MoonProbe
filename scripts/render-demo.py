@@ -2,7 +2,7 @@
 import hashlib,json,pathlib,subprocess,sys,textwrap
 from PIL import Image,ImageDraw,ImageFont
 ROOT=pathlib.Path(__file__).resolve().parent.parent
-OUT=ROOT/'work'/'demo-artifact'
+OUT=pathlib.Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'work'/'demo-artifact'
 OUT.mkdir(parents=True,exist_ok=False)
 EXE=ROOT/'work'/'bin'/'moonprobe.exe'
 SPEC=ROOT/'examples'/'extract-deadline.json'
