@@ -466,18 +466,18 @@ test "H04 numeric and array shrinking preserve valid input" {
     "adapter_id": "echo",
     "input_schema": {
       "type": "object",
-      "properties": { "n": { "type": "integer", "minimum": 0, "maximum": 10 } },
+      "properties": { "n": { "type": "integer", "minimum": 0, "maximum": 100 } },
       "required": ["n"],
     },
     "output_schema": {
       "type": "object",
-      "properties": { "n": { "type": "integer", "minimum": 5 } },
+      "properties": { "n": { "type": "integer", "minimum": 50 } },
       "required": ["n"],
     },
   })
   let c : Case = {
     index: 0,
-    args: { "n": 4 },
+    args: { "n": 40 },
     category: "valid",
     expected: None,
   }

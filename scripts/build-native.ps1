@@ -14,6 +14,8 @@ try {
   New-Item -ItemType Directory -Force -Path "$ProjectRoot\work\logs" | Out-Null
   $plan | Set-Content -LiteralPath "$ProjectRoot\work\logs\$mode-plan.log" -Encoding utf8
   foreach ($line in $plan) {
+    $line = $line.Replace('$MOON_HOME', $env:MOON_HOME.Replace('\','/'))
+    if ($line -match '^moonc ' ) { $line = "& '$env:MOON_HOME/bin/moonc.exe' " + $line.Substring(6) }
     if ($line -match '^moon generate-test-driver') {
       if ($line -match '--output-driver (\S+)') { New-Item -ItemType Directory -Force -Path (Split-Path $Matches[1] -Parent) | Out-Null }
       Invoke-Expression ("& '$Moon' " + $line.Substring(5))
