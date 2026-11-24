@@ -8,7 +8,7 @@ v0.2.1 已接入真实 Python 标准库 URL 表单解析器，复现并修复空
 
 ## 下载运行（无需编译）
 
-[下载 v0.2.1 Windows x64 交付包](https://github.com/3518936226-afk/MoonProbe/raw/refs/heads/main/MoonProbe-0.2.1-windows-x64.zip)，解压到 D 盘，在解压后的 MoonProbe-0.2.1 目录打开 PowerShell 7：
+[下载 v0.2.2 Windows x64 交付包](https://github.com/3518936226-afk/MoonProbe/releases/download/v0.2.2/MoonProbe-0.2.2-windows-x64.zip)，解压到 D 盘，在解压后的 MoonProbe-0.2.2 目录打开 PowerShell 7：
 
 ~~~powershell
 .\MoonProbe.cmd --version
@@ -20,9 +20,9 @@ v0.2.1 已接入真实 Python 标准库 URL 表单解析器，复现并修复空
 
 buggy 的 test/replay 预期退出 1，fixed 回放退出 0。输出目录必须尚未存在。CLI 本身无需 Python、网络、账号或凭据；真实进程案例另外需要已有 Python 3.12。ZIP 含程序、源码、完整 Git 历史、逐文件哈希和原始验证记录；其状态说明冻结于发布时。
 
-ZIP SHA-256：1ca5368641c9f744155585335b8980098101fd1789362735d16f43d05cefd7f5。
+[下载包 SHA-256 校验清单](https://github.com/3518936226-afk/MoonProbe/releases/download/v0.2.2/SHA256SUMS-v0.2.2.txt)。
 
-上面保留的是历史 v0.2.1 包。当前源码 v0.2.2 修复了远程 CI 发现的 MinGW Unicode 命令行参数问题；处理中文或 emoji 路径应使用当前源码构建，新的修复包将随 v0.2.2 发布提供。
+v0.2.2 修复了远程 CI 发现的 MinGW Unicode 命令行参数问题。[问题与修复记录](https://github.com/3518936226-afk/MoonProbe/issues/3)。仓库根目录保留的 v0.2.1 ZIP 是历史版本，内容与哈希不变。
 
 ## 从源码构建
 
@@ -56,7 +56,7 @@ pwsh -NoProfile -File scripts/harness.ps1
 
 ## 验证与证据
 
-v0.2.1 的已运行本地证据见 [evidence/local-v0.2.1/README.md](evidence/local-v0.2.1/README.md)：66 项验收（29 组 Native 单元测试）、64 项真实工具/传输检查、100 份契约与 10,000 组独立差分（差异 0）、12 个成功编译且被识别的源码变异。另有干净检出复现与原始基准记录。
+v0.2.2 的完整本地检查已通过：68 项验收、64 项真实工具/传输检查、10,000 组差分零差异和 12/12 编译变异识别，见 [当前本地验证摘要](evidence/local-v0.2.2/README.md)。旧版本 v0.2.1 的已运行本地证据见 [evidence/local-v0.2.1/README.md](evidence/local-v0.2.1/README.md)：66 项验收（29 组 Native 单元测试）、64 项真实工具/传输检查、100 份契约与 10,000 组独立差分（差异 0）、12 个成功编译且被识别的源码变异。另有干净检出复现与原始基准记录。
 
 完整开发验证另需 Python 3.12 x64。开发依赖锁定版本和 wheel 哈希，只安装到项目 work/：
 

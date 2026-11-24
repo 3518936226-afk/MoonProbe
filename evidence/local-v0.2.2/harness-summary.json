@@ -1,0 +1,515 @@
+{
+  "demo": {
+    "passed": 21,
+    "cases": 32,
+    "adapter_calls": 13,
+    "reduction_ratio": 0.7123287671232876,
+    "original_bytes": 73,
+    "reduced_bytes": 21,
+    "failed": 11
+  },
+  "unit_groups": 29,
+  "status": "passed",
+  "source_commit": "01fbb786b0c7ca41ffd00309ab1996cee83dc254",
+  "checks": [
+    {
+      "status": "passed",
+      "id": "format"
+    },
+    {
+      "status": "passed",
+      "id": "typecheck"
+    },
+    {
+      "status": "passed",
+      "id": "native-build"
+    },
+    {
+      "status": "passed",
+      "id": "native-test-build"
+    },
+    {
+      "status": "passed",
+      "id": "unit-results-count"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-0"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-1"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-2"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-3"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-4"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-5"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-6"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-7"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-8"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-9"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-10"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-11"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-12"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-13"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-14"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-15"
+    },
+    {
+      "status": "passed",
+      "id": "unit-engine_wbtest.mbt-16"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-0"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-1"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-2"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-3"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-4"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-5"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-6"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-7"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-8"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-9"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-10"
+    },
+    {
+      "status": "passed",
+      "id": "unit-depth_wbtest.mbt-11"
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "inspect",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 1,
+      "expected_exit": 1,
+      "id": "buggy",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\buggy"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 1,
+      "expected_exit": 1,
+      "id": "buggy-repeat",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\buggy-repeat"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "fixed",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--mock",
+        "fixed",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\fixed"
+      ]
+    },
+    {
+      "status": "passed",
+      "id": "32-cases"
+    },
+    {
+      "status": "passed",
+      "id": "determinism"
+    },
+    {
+      "status": "passed",
+      "id": "fixed-all-pass"
+    },
+    {
+      "status": "passed",
+      "id": "invalid-zero-calls"
+    },
+    {
+      "status": "passed",
+      "id": "signature"
+    },
+    {
+      "status": "passed",
+      "id": "shrinking"
+    },
+    {
+      "status": "passed",
+      "actual_exit": 1,
+      "expected_exit": 1,
+      "id": "replay-buggy",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\buggy\\corpus",
+        "--mock",
+        "buggy"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "replay-fixed",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\buggy\\corpus",
+        "--mock",
+        "fixed"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 3,
+      "expected_exit": 3,
+      "id": "missing-file",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\not-found.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "bad-args",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--cases",
+        "201",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\bad"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "duplicate-option",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--cases",
+        "1",
+        "--cases",
+        "2",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\bad"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "malformed-json",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\malformed.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "unsupported-schema",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\unsupported.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "duplicate-key",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\duplicate.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "invalid-utf8",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\invalid-utf8.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "file-budget",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\too-large.json"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "fingerprint-mismatch",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\corrupt",
+        "--mock",
+        "fixed"
+      ]
+    },
+    {
+      "status": "passed",
+      "id": "unique-inputs"
+    },
+    {
+      "status": "passed",
+      "id": "signature-groups"
+    },
+    {
+      "status": "passed",
+      "id": "full-call-cost"
+    },
+    {
+      "status": "passed",
+      "actual_exit": 1,
+      "expected_exit": 1,
+      "id": "shrink-budget",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--shrink-budget",
+        "1",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\budget-one"
+      ]
+    },
+    {
+      "status": "passed",
+      "id": "shrink-budget-enforced"
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "bad-shrink-budget",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--shrink-budget",
+        "1001",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\bad-budget"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "v1-replay-fixed",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\fixtures\\v1-corpus",
+        "--mock",
+        "fixed"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 1,
+      "expected_exit": 1,
+      "id": "v1-replay-buggy",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\fixtures\\v1-corpus",
+        "--mock",
+        "buggy"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 2,
+      "expected_exit": 2,
+      "id": "no-overwrite",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\fixed"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 3,
+      "expected_exit": 3,
+      "id": "write-error",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\extract-deadline.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\blocked-output"
+      ]
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "unicode-path",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\examples\\echo.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\中文目录"
+      ]
+    },
+    {
+      "status": "passed",
+      "id": "unicode-directory-exact"
+    },
+    {
+      "status": "passed",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "id": "unicode-input-file",
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v022-release-proof\\harness\\输入🙂.json"
+      ]
+    }
+  ],
+  "utc": "2026-11-24T15:40:20.6689679Z"
+}

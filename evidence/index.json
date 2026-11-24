@@ -1,7 +1,7 @@
 {
   "format_version": 2,
-  "release": "0.2.1",
-  "commit_binding": "Frozen local-v0.2.1 summaries bind source da358f2841db20c46db8cb18615be174bf62f0cc. Current remote runs bind their own head SHA; root ZIP retains its original manifest.",
+  "release": "0.2.2",
+  "commit_binding": "Local-v0.2.1 binds da358f2; local-v0.2.2 and the recorded successful remote run bind 01fbb78. The new publication/documentation commit does not relabel those runs; see evidence/publication.json.",
   "dimensions": [
     {
       "dimension": "engineering",
@@ -11,10 +11,10 @@
         "evidence/local-v0.2.1/independent-summary.json",
         "evidence/local-v0.2.1/mutation-summary.json",
         "evidence/local-v0.2.1/benchmark-summary.json",
-        "docs/ai-review.md"
+        "docs/ai-review.md",
+        "evidence/publication.json"
       ],
       "external_gaps": [
-        "remote CI execution",
         "participant human sign-off"
       ]
     },
@@ -68,7 +68,7 @@
   },
   "competition": {
     "public_repository": "https://github.com/3518936226-afk/MoonProbe",
-    "remote_ci": "configured_not_executed",
+    "remote_ci": "https://github.com/3518936226-afk/MoonProbe/actions/runs/45428050878",
     "registration": "not_performed",
     "submission": "not_performed"
   },
@@ -83,9 +83,10 @@
   },
   "publication": {
     "public_repository_created": true,
-    "source_and_history_sync": "prepared_for_push",
-    "remote_ci": "pending_actual_run",
+    "source_and_history_sync": "public branch publish/source-and-ci, PR #2",
+    "remote_ci": "verified success at 01fbb786b0c7ca41ffd00309ab1996cee83dc254",
     "local_snapshot_commit": "da358f2841db20c46db8cb18615be174bf62f0cc",
-    "participant_review": "docs/participant-review.md"
+    "participant_review": "docs/participant-review.md",
+    "verification_record": "evidence/publication.json"
   }
 }

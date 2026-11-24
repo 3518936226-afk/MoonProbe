@@ -2,3 +2,5 @@
 *.png binary
 *.mp4 binary
 *.zip binary
+fixtures/upstream/** linguist-vendored=true
+engine/pkg.generated.mbti linguist-generated=true

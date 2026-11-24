@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/3518936226-afk/MoonProbe",
+  "source_publication_commit": "098a6c9e9e6b24e814491f32e6b07478801c6f88",
+  "unicode_fix_commit": "01fbb786b0c7ca41ffd00309ab1996cee83dc254",
+  "pull_request": "https://github.com/3518936226-afk/MoonProbe/pull/2",
+  "issues": [
+    "https://github.com/3518936226-afk/MoonProbe/issues/1",
+    "https://github.com/3518936226-afk/MoonProbe/issues/3"
+  ],
+  "original_upload_commit_preserved": "da3b563f05ae67760a3a686a47a63d02451fb9b8",
+  "ci": {
+    "run_id": 45428050878,
+    "url": "https://github.com/3518936226-afk/MoonProbe/actions/runs/45428050878",
+    "head_sha": "01fbb786b0c7ca41ffd00309ab1996cee83dc254",
+    "event": "pull_request",
+    "conclusion": "success",
+    "updated_at": "2026-11-24T15:44:34Z",
+    "artifact_name": "native-depth-evidence",
+    "artifact_id": 14937607065,
+    "full_gates": [
+      "Native Harness:68 checks,29 groups",
+      "Real process/transport:64 checks",
+      "Differential:10000 pairs,0 mismatches",
+      "Mutations:12 compiled and killed",
+      "Benchmarks:completed"
+    ]
+  },
+  "failed_run": "https://github.com/3518936226-afk/MoonProbe/actions/runs/45426753846",
+  "frozen_local_v022": "evidence/local-v0.2.2/README.md",
+  "human_tasks_pending": [
+    "participant review and ability to explain",
+    "contest group membership and GitHub nickname",
+    "official timing and eligibility verification",
+    "registration and submission",
+    "independent developer trial",
+    "live screen recording"
+  ]
+}
