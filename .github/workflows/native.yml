@@ -1,0 +1,49 @@
+name: Native core and independent verification
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install MinGW compiler
+        id: msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: mingw-w64-x86_64-gcc
+      - name: Select compiler and D-drive workspace
+        shell: pwsh
+        env:
+          MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}
+        run: |
+          if ((Split-Path $env:GITHUB_WORKSPACE -Qualifier) -ne 'D:') {
+            throw 'Verification requires a D-drive workspace for local process transport.'
+          }
+          "MOONPROBE_GCC_BIN=$env:MSYS2_LOCATION\mingw64\bin" >> $env:GITHUB_ENV
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Install content-pinned MoonBit
+        shell: pwsh
+        run: ./scripts/install-toolchain.ps1
+      - name: Install hash-pinned development oracle
+        shell: pwsh
+        run: ./scripts/setup-depth.ps1 -Python (Get-Command python.exe).Source
+      - name: Native, real process, differential, mutation and benchmark gates
+        shell: pwsh
+        run: ./scripts/verify-all.ps1 -Python (Get-Command python.exe).Source -OutDir "$env:GITHUB_WORKSPACE/work/ci"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-depth-evidence
+          path: work/ci

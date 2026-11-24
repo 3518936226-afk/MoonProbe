@@ -1,0 +1,92 @@
+{
+  "format_version": 2,
+  "release": "0.2.2",
+  "commit_binding": "Local-v0.2.1 binds da358f2; local-v0.2.2 and the recorded successful remote run bind 01fbb78. The new publication/documentation commit does not relabel those runs; see evidence/publication.json.",
+  "dimensions": [
+    {
+      "dimension": "engineering",
+      "status": "passed_locally",
+      "evidence": [
+        "evidence/local-v0.2.1/harness-summary.json",
+        "evidence/local-v0.2.1/independent-summary.json",
+        "evidence/local-v0.2.1/mutation-summary.json",
+        "evidence/local-v0.2.1/benchmark-summary.json",
+        "docs/ai-review.md",
+        "evidence/publication.json"
+      ],
+      "external_gaps": [
+        "participant human sign-off"
+      ]
+    },
+    {
+      "dimension": "delivery",
+      "status": "passed_locally",
+      "evidence": [
+        "evidence/local-v0.2.1/clean-summary.json",
+        "examples/extract-deadline.json",
+        "fixtures/v1-corpus/entries.json",
+        "docs/support-matrix.md"
+      ],
+      "external_gaps": [
+        "live desktop screen recording"
+      ]
+    },
+    {
+      "dimension": "impact",
+      "status": "real_stdlib_configuration_case",
+      "evidence": [
+        "evidence/local-v0.2.1/process-summary.json",
+        "evidence/local-v0.2.1/default-replay.log",
+        "evidence/local-v0.2.1/fixed-replay.log",
+        "docs/real-tool-case.md"
+      ],
+      "external_gaps": [
+        "authorized real-user product defect beyond this stdlib configuration case",
+        "independent developer reproduction",
+        "measured manual-task comparison"
+      ]
+    },
+    {
+      "dimension": "technical_contribution",
+      "status": "passed_locally",
+      "evidence": [
+        "engine/",
+        "docs/v0.2-design.md",
+        "evidence/local-v0.2.1/benchmark-summary.json",
+        "evidence/local-v0.2.1/independent-summary.json"
+      ],
+      "external_gaps": []
+    }
+  ],
+  "core_verification": {
+    "reference": "jsonschema 4.26.0 Draft202012Validator",
+    "suite_commit": "e2a68a15cd490750fd6b95e604e4054d7d978d1f",
+    "differential_schemas": 100,
+    "differential_pairs": 10000,
+    "defined_source_mutations": 12,
+    "scope": "Only declared subset and bounded representations; not full JSON Schema conformance"
+  },
+  "competition": {
+    "public_repository": "https://github.com/3518936226-afk/MoonProbe",
+    "remote_ci": "https://github.com/3518936226-afk/MoonProbe/actions/runs/45428050878",
+    "registration": "not_performed",
+    "submission": "not_performed"
+  },
+  "ai": {
+    "tool": "Codex",
+    "review": "documented_self_review",
+    "human_understanding": "pending_participant_review"
+  },
+  "demo": {
+    "type": "raw_process_execution_logs",
+    "desktop_recording": "pending_not_claimed"
+  },
+  "publication": {
+    "public_repository_created": true,
+    "source_and_history_sync": "public branch publish/source-and-ci, PR #2",
+    "remote_ci": "verified success at 01fbb786b0c7ca41ffd00309ab1996cee83dc254",
+    "local_snapshot_commit": "da358f2841db20c46db8cb18615be174bf62f0cc",
+    "participant_review": "docs/participant-review.md",
+    "verification_record": "evidence/publication.json"
+  }
+}

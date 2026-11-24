@@ -1,0 +1,437 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "inspect",
+      "status": "passed"
+    },
+    {
+      "id": "default-test",
+      "status": "passed"
+    },
+    {
+      "id": "real-output-contract-failure",
+      "status": "passed"
+    },
+    {
+      "id": "minimal-empty-value-found",
+      "status": "passed"
+    },
+    {
+      "id": "context-removed-during-shrink",
+      "status": "passed"
+    },
+    {
+      "id": "default-replay",
+      "status": "passed"
+    },
+    {
+      "id": "same-signatures-reproduced",
+      "status": "passed"
+    },
+    {
+      "id": "fixed-replay",
+      "status": "passed"
+    },
+    {
+      "id": "all-saved-failures-fixed",
+      "status": "passed"
+    },
+    {
+      "id": "fixed-test",
+      "status": "passed"
+    },
+    {
+      "id": "fresh-generated-tests-fixed",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-0",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-0",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-0",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-1",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-1",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-1",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-2",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-2",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-2",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-3",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-3",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-3",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-4",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-4",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-4",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-5",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-5",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-5",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-default-6",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-preserve-6",
+      "status": "passed"
+    },
+    {
+      "id": "semantic-roundtrip-6",
+      "status": "passed"
+    },
+    {
+      "id": "transport-echo",
+      "status": "passed"
+    },
+    {
+      "id": "successful-echo",
+      "status": "passed"
+    },
+    {
+      "id": "transport-argv",
+      "status": "passed"
+    },
+    {
+      "id": "successful-argv",
+      "status": "passed"
+    },
+    {
+      "id": "transport-cwd",
+      "status": "passed"
+    },
+    {
+      "id": "successful-cwd",
+      "status": "passed"
+    },
+    {
+      "id": "transport-exit",
+      "status": "passed"
+    },
+    {
+      "id": "classified-exit",
+      "status": "passed"
+    },
+    {
+      "id": "transport-json",
+      "status": "passed"
+    },
+    {
+      "id": "classified-json",
+      "status": "passed"
+    },
+    {
+      "id": "transport-duplicate",
+      "status": "passed"
+    },
+    {
+      "id": "classified-duplicate",
+      "status": "passed"
+    },
+    {
+      "id": "transport-utf8",
+      "status": "passed"
+    },
+    {
+      "id": "classified-utf8",
+      "status": "passed"
+    },
+    {
+      "id": "transport-large",
+      "status": "passed"
+    },
+    {
+      "id": "classified-large",
+      "status": "passed"
+    },
+    {
+      "id": "transport-stderr",
+      "status": "passed"
+    },
+    {
+      "id": "classified-stderr",
+      "status": "passed"
+    },
+    {
+      "id": "transport-timeout",
+      "status": "passed"
+    },
+    {
+      "id": "classified-timeout",
+      "status": "passed"
+    },
+    {
+      "id": "transport-spawn",
+      "status": "passed"
+    },
+    {
+      "id": "classified-spawn",
+      "status": "passed"
+    },
+    {
+      "id": "timeout-kills-child-tree",
+      "status": "passed"
+    },
+    {
+      "id": "exclusive-transport",
+      "status": "passed"
+    },
+    {
+      "id": "family-mismatch",
+      "status": "passed"
+    },
+    {
+      "id": "missing-exe",
+      "status": "passed"
+    },
+    {
+      "id": "missing-exe-classified",
+      "status": "passed"
+    },
+    {
+      "id": "marker-first",
+      "status": "passed"
+    },
+    {
+      "id": "occupied-output",
+      "status": "passed"
+    },
+    {
+      "id": "occupied-output-does-not-invoke",
+      "status": "passed"
+    },
+    {
+      "id": "c-drive-denied",
+      "status": "passed"
+    },
+    {
+      "id": "transport-temp-files-cleaned",
+      "status": "passed"
+    }
+  ],
+  "source_commit": "da358f2841db20c46db8cb18615be174bf62f0cc",
+  "source_files_sha256": {
+    ".gitattributes": "0f9a281993e7ad691e429053f7aa08a27d07d029b44db94cd6a03620e10d883c",
+    ".github/workflows/native.yml": "fada464897af8f9da3dc63e4a6d5873cf68980fb0c258dc6b65ec24e521edb41",
+    ".gitignore": "4beb05735bdd0e93c5ba0d9b47fb5fc86a259cbbf89f9521dc99f1b7c9b48a3a",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "MoonProbe.cmd": "e50dc4d0025d54d805f73e655258e90e2a41b4a4b6a24a99d7869c84ccca21a3",
+    "README.md": "89e7a3335c3a985e650773c2927836a9251e609f93ad4b724321c504e840f2c2",
+    "THIRD_PARTY_NOTICES.md": "93aea02da22e994366026c913ccb9c68ea72b19f9ad51877a0fbc44d8209b44d",
+    "cmd/moonprobe/compare.mbt": "3446ec79a675ca60b5bb9b88e0ac75a8d72a3acc77ded9c3deaeedc1f9178258",
+    "cmd/moonprobe/io.mbt": "3e7c08a8939e0b5e052a7436e739e55df4dc10262d1298f5c5693bd4447ce189",
+    "cmd/moonprobe/main.mbt": "b08bee8c288c6f3bf5576ffefbaa29f9434d7c6fc2fbd49eccbf2267bd881fea",
+    "cmd/moonprobe/moon.pkg": "6daec0f7d0b305e87657a88ef60dfe1b7436f22d5803b7290dcdbcaf3ba61fc7",
+    "cmd/moonprobe/native_io.c": "3581a28c5c96833a44ce41483ee3b62925c3e5793398cd052d402e284b4468a5",
+    "cmd/moonprobe/native_process.c": "3baae6f15272b4ad05eb68463b6dd96b9fccdcd2a4035aeff9fc6472e86e362f",
+    "cmd/moonprobe/pkg.generated.mbti": "4c37a277c307519140a46209f8b5585582d33e6b43c2045fcafd974404a2448b",
+    "cmd/moonprobe/process.mbt": "8b27aefc518cf4be8d6aaf6708368e0fc8feeb1dc2493bb2988f80238b5a1680",
+    "cmd/oracle/io.mbt": "e9a089e062c6b64b5fc47156e7b6fe931da327c7dca3d3cfb61614a6053753c4",
+    "cmd/oracle/main.mbt": "20d77bd9d152906d0319e943dd233ab44a0531652714a6621e24aef8d655f73a",
+    "cmd/oracle/moon.pkg": "e64c5282cd3099d4847143be13a6b050271a9afabd425fc3169833e839f92327",
+    "cmd/oracle/native_io.c": "3581a28c5c96833a44ce41483ee3b62925c3e5793398cd052d402e284b4468a5",
+    "cmd/oracle/pkg.generated.mbti": "ec69a518399a4ed97dd2d68c74afc319912fb32a4b0a6c133f99cdf2b0364329",
+    "docs/acceptance.md": "e26bf15bb84f7e8f88c03369eb6c21a8b793ffa2ffbce967f152bb62711c0613",
+    "docs/ai-review.md": "d58be6da7a31dd37e8fa270aea2248c91dd1ab6b5d1180ab9c0042aca441146a",
+    "docs/architecture.md": "de9080088cb7c8301ecbb14782e47a5896f258de1b86b61d07ab121a9762e0b1",
+    "docs/demo.md": "86be5458e8751fd667db68447df3e2210cf1d5da69f1f1bf47fc398b482490d2",
+    "docs/real-tool-case.md": "03df9294359cb6c92641104d5fbec9f4e4a8a21ceab09bd3120aaa4f2437f162",
+    "docs/scope-log.md": "743657203209d0f6d7ff9cd739fb4fc52d48bb99e0f23c54ba1e923159ea0a2c",
+    "docs/support-matrix.md": "14f698fbe76f06e9e63113de2083f965ebde34daa2ff97596513ece0f19005f3",
+    "docs/v0.2-design.md": "58bd5372974769c11f90a26a6dbc6bb559a09ac6b792c245444dee7c84ab9211",
+    "engine/adapters.mbt": "2855ff37be75acc597dfdaced0a3aad05ec597216d827af73ea85d5c7a7520ad",
+    "engine/depth_wbtest.mbt": "a256546d0439135c407457a89ea3f49e17f9ad9f488b3e11e9767a57db029f25",
+    "engine/engine_wbtest.mbt": "d5e51f158cd5b9c22c941a275a517c959e92262847cfacf57ef3a72614b6540f",
+    "engine/generator.mbt": "cdf8bacf57322480c41f8c5b390b18386c3842bb3d853066e429d2774f4e3087",
+    "engine/ir.mbt": "0ad9656f78482160335509c6de34f6e90e235774ef479bc2b832939a401471a3",
+    "engine/legacy_generator.mbt": "ac062c5c3cc969c36b0cf532e96717707c0e10f3b2a1b86e4531973438b7ba2a",
+    "engine/legacy_shrink.mbt": "dab8d9753d913ff8a3f16bc57a57a05c4546056edc0f53f1215a836f189c9730",
+    "engine/model.mbt": "7c6c125e26c880e8af8ae3c159302f2fcc59e1030526608288613fddcfbfc7d7",
+    "engine/moon.pkg": "6dd455b80b7d01e1c16bc3833eb5bf547135fb1eee4220ed9a29799a7d1e070c",
+    "engine/pkg.generated.mbti": "ceeafed241603d5af731b08e0f36478395143024ae0783ffe311e33ad92783b2",
+    "engine/report.mbt": "8b988cd78db7bf3a96f61e14e98db48f7afa2c9b904147b3936379ff84d5351d",
+    "engine/runner.mbt": "47144f5b33da517582aa3a9fbbd10fd733824821994cd91dae9fc752295c629a",
+    "engine/schema.mbt": "87e1f6ac39000405453c0c73a015f6a8895957600581ca2f196798bdfbe22cb7",
+    "engine/sha256.mbt": "3023efa44b71b1c277341987fa8d43d301f8ae7d32a1d4f75b30e9c1d8585b5e",
+    "engine/shrink.mbt": "70b11f56cd9a2bc9435312b9391160edeefa1e4541756112486986977624c7a0",
+    "evidence/index.json": "acc23ddaa9c8303d5fe8e1c81cb79282d7a0916f857b6bcb9fc7d65c40acaa80",
+    "examples/echo.json": "3d6f416ec8b9fb389008aab95774b1bd1d063d722386536f7a24833844cb7c70",
+    "examples/extract-deadline.json": "29080bc13b0d7b9f45ae89caa9cc832fe3076c9a044bdd3ee4ad49610b3bb957",
+    "examples/url-query.json": "27aa29ac6bf5d58607ede167fb4a1f4e09a45c2f51fc9a8e691d4f3767d8ac38",
+    "fixtures/process_fixture.py": "92e575ed3e54993e5b9f572e110d719eff23f8bdd5232146afe2ce713eb2aac4",
+    "fixtures/schema-suite.lock.json": "f025cfa0bb28a9673d151090a3b3cc369191ba319905e2a253145facb92d280b",
+    "fixtures/upstream/schema-suite/LICENSE": "210c8fc7afbd782d2bd46af6f9ca5b4b110978b34c93e37c7b080cfbf399de24",
+    "fixtures/upstream/schema-suite/PINNED.json": "f025cfa0bb28a9673d151090a3b3cc369191ba319905e2a253145facb92d280b",
+    "fixtures/upstream/schema-suite/validation/tests/additionalProperties.json": "28ff5ca6a46d18f7fe91ccef3495d29623f9a5c7f4dd1693d278c6b9f3154cb4",
+    "fixtures/upstream/schema-suite/validation/tests/allOf.json": "0af3955da62b139846cc7271ccae5e5e0d622b5aab2cdad08e1932871faf653e",
+    "fixtures/upstream/schema-suite/validation/tests/anchor-legacy.json": "56fd7d7dc016c6f2979709e676c15cdee336d5805c2b86aaea8523de140584ba",
+    "fixtures/upstream/schema-suite/validation/tests/anchor.json": "bf49c4909816e9367b0f14f1c88765552c794509e7ed36ccfa5940ca6479bf21",
+    "fixtures/upstream/schema-suite/validation/tests/anyOf.json": "1d0fe4c88cf883ccecdb5ab460890b5245e65abef11355134205896a5a835812",
+    "fixtures/upstream/schema-suite/validation/tests/boolean_schema.json": "9eb5bf54aae437a52cd0dd957262ad84f61857dc0a327af4e5e45d7cea476b6b",
+    "fixtures/upstream/schema-suite/validation/tests/const.json": "da38ba83f6b100b0fbe343dcf0123bb3accd319c7f5c83b104ab44256e7ec218",
+    "fixtures/upstream/schema-suite/validation/tests/contains.json": "2830bad678c81c254451839f39d9f4f5065db6ddf5074115fe3206e8c33c365e",
+    "fixtures/upstream/schema-suite/validation/tests/content.json": "e74700d342eb2f1b4c5e73a2594424dd856155f51c9e15f64bedd88eae04ac99",
+    "fixtures/upstream/schema-suite/validation/tests/default.json": "0be2dcf089db064e247222e94dd1f5c35461e5eb386e951b1e0853f6449f3dad",
+    "fixtures/upstream/schema-suite/validation/tests/dependentRequired.json": "ff4a94f5132d806a50a013e74f22783bbbcac4545db58d260e7cc627e29c49d5",
+    "fixtures/upstream/schema-suite/validation/tests/dependentSchemas.json": "f5de714b730e39b6b3315d8401cbd807bc8d3ea2fd6da9107410484760a2174c",
+    "fixtures/upstream/schema-suite/validation/tests/disallow.json": "4186cbea53f5c44e30659398e9d5c0441d2967b71f3bb66a0d95c994a9f8664b",
+    "fixtures/upstream/schema-suite/validation/tests/dynamicRef.json": "e76cc96c8bb23c0f07390b83189a961ca924b62e800624724627d142c1864077",
+    "fixtures/upstream/schema-suite/validation/tests/enum.json": "3d0285d73e32cd0cca2e43f8e8b2fa657f5386326166830fa0fe88cc64c4a121",
+    "fixtures/upstream/schema-suite/validation/tests/extends.json": "369099c7acc4ca8da60cd14f188502144064be1bd1da0997ecd980f9c9dc684d",
+    "fixtures/upstream/schema-suite/validation/tests/format-color.json": "9ee4d0f2f1225592709a3b039192ab7b91f2375852c48dd35c8a4f8f14ee195b",
+    "fixtures/upstream/schema-suite/validation/tests/format-date-time.json": "f7dee7fc2660c15bc0f0c10470ef89e17058e84e8129599cc88ae04559d61378",
+    "fixtures/upstream/schema-suite/validation/tests/format-date.json": "787ea871d4c0f7827b3506f995b8ba922c85bdb3eea7816a2e4a5363f7bd91cb",
+    "fixtures/upstream/schema-suite/validation/tests/format-duration.json": "7d146700f9ad111eb1722d4280951ac5676f4cd9abb3db1ba92a691ea871483d",
+    "fixtures/upstream/schema-suite/validation/tests/format-email.json": "9e5332fd55e77fc22a58b3f9e8630fd0f3da9a32ab99b5256533e67d2d75234b",
+    "fixtures/upstream/schema-suite/validation/tests/format-host-name.json": "f8498a154b115789692e4353a6559befccbf7a2c09c457ea1a3562a126e200ef",
+    "fixtures/upstream/schema-suite/validation/tests/format-hostname.json": "4984907e08e6685a03d052312840ae6f611df9fec6eca58be49a92619cf8182d",
+    "fixtures/upstream/schema-suite/validation/tests/format-idn-email.json": "c47cb94df91c87fb0f950a54e73acfa816638e33940b4bc21ea7f3451fc895ed",
+    "fixtures/upstream/schema-suite/validation/tests/format-idn-hostname.json": "0333e33014aa6553eeba437cf7fdc590fd51abd4a0eed7ee559dcb73f80c8222",
+    "fixtures/upstream/schema-suite/validation/tests/format-ip-address.json": "0215587b46f0bbfc9fee2fc6fb82484ad12b44e263d19bf413b3d901e9eb33d4",
+    "fixtures/upstream/schema-suite/validation/tests/format-ipv4.json": "32eb3860bf6cf1cc4deeb1f81cf070d9835982f48ee057db68416b055b183a80",
+    "fixtures/upstream/schema-suite/validation/tests/format-ipv6.json": "2f4cf0abb32ffff14b25d0d009786c813e2421f1253a12858df72250e76a7ca7",
+    "fixtures/upstream/schema-suite/validation/tests/format-iri-reference.json": "c687b843ee313516ef499be2f1dfe5a134ee43b2896caf9f9c395846975b041b",
+    "fixtures/upstream/schema-suite/validation/tests/format-iri.json": "88e029c0954f03c1112a0ff0d97f991f6f4fe0869c4920d6153f6fa9912bd351",
+    "fixtures/upstream/schema-suite/validation/tests/format-json-pointer.json": "b3ef70a34e9c6f4073fc4a28546a65738baaa303892eab81c4860806f29d6060",
+    "fixtures/upstream/schema-suite/validation/tests/format-regex.json": "2e13c1f314a1c7ccd7df86bd4afcad149fa6ebbd91acce404962b80f1dba997d",
+    "fixtures/upstream/schema-suite/validation/tests/format-relative-json-pointer.json": "5b8a28455555eacfe2371ccdae86c90de7fc1ee29b2e91a7a6db795d860df9e8",
+    "fixtures/upstream/schema-suite/validation/tests/format-time.json": "c72c664b1940ccf8c60c4935443c141508b644fec3c5bfbd94dfe8799684d6eb",
+    "fixtures/upstream/schema-suite/validation/tests/format-unknown.json": "9b6d9674e625ee4fe079e3510a00be96035c388df37296c98660b0cc69db46d7",
+    "fixtures/upstream/schema-suite/validation/tests/format-uri-reference.json": "f44b30c0a1c26d9e5e04bf6554f7a0579b382ea8d90ceb9af4a2c6ae710bb07c",
+    "fixtures/upstream/schema-suite/validation/tests/format-uri-template.json": "21a10e0e524c7f1c38c0031c25515db48e525fc38b06af8f1926e167f249963f",
+    "fixtures/upstream/schema-suite/validation/tests/format-uri.json": "a43d0b46a7940e294755d93cf19ef89b6dc4fcb487afa7b631e2f600327d2e74",
+    "fixtures/upstream/schema-suite/validation/tests/format-uuid.json": "cc6431891498017773ee993ed8d0570a3a2997590ae7831acacd1daa1ae9a23b",
+    "fixtures/upstream/schema-suite/validation/tests/id-legacy.json": "592d008afd066305309d3fa8479164310190d56895da8dfb67e77d1f77096b89",
+    "fixtures/upstream/schema-suite/validation/tests/id.json": "b650799c3bf56f354fbd678b88bcbd5cb25e130fd9b7805c47496b16cc15a1ad",
+    "fixtures/upstream/schema-suite/validation/tests/if-then-else.json": "510a1a7923e97584d3ee596921e81c49dad9ac08c185f0b1aae679196bc97826",
+    "fixtures/upstream/schema-suite/validation/tests/infinite-loop-detection-legacy.json": "bbea531f72b4a8641909b9ca59ede0ec1eb6c2bdf1fe01593a42c47ad523b4c7",
+    "fixtures/upstream/schema-suite/validation/tests/infinite-loop-detection.json": "09cbc3378f40434122ce1d00e7ea12eb7ad7488af13e95bd2e41db5b55f78457",
+    "fixtures/upstream/schema-suite/validation/tests/items.json": "e5c7f44a5c5763b591e0729e0427b8996fce9e742764ee20dd7c7ad1239d967c",
+    "fixtures/upstream/schema-suite/validation/tests/maxItems.json": "269402702d1b1ae22f6c4ac8751f112b6723becf8b126adce400e5e276162878",
+    "fixtures/upstream/schema-suite/validation/tests/maxLength.json": "c54520bdb5bd1218564e415abf24ab3bb10196e2b039a14da4f2a7909df3e424",
+    "fixtures/upstream/schema-suite/validation/tests/maxProperties.json": "1af0d7b31f30cb9ed5ed363e563988aedac229f92024766a5a1e10ace8f74006",
+    "fixtures/upstream/schema-suite/validation/tests/maximum.json": "719524eaa84d24b4bdeaa1a51630ca803def84bca51920f218c1dfe2a44d6d85",
+    "fixtures/upstream/schema-suite/validation/tests/minItems.json": "f82542fe9e18ee792fc15be8e6cd9a5914827a7dea472648046e5bb3a306f41c",
+    "fixtures/upstream/schema-suite/validation/tests/minLength.json": "bcbf1fd3a258349ef65f69d08a6245ff14c9401611d38dc7421a89e9d5994cf4",
+    "fixtures/upstream/schema-suite/validation/tests/minProperties.json": "dde2efcf17b7cd9d7afacd78dea63670cbb9e41eca2ff4b67a8a2b5d7e6496c9",
+    "fixtures/upstream/schema-suite/validation/tests/minimum.json": "3cd1c4f57dd3e71440e9157c12b96330a61ac5581b21cf4a95802aea9c989113",
+    "fixtures/upstream/schema-suite/validation/tests/multipleOf.json": "9a0d3cf51d89159a86be5fd2d41dcbdfec654c00a6e542dfc6f144ca5f150c49",
+    "fixtures/upstream/schema-suite/validation/tests/not.json": "036095e3b94486fa89ce95d38b3872cfe288406d2a0a95a9ddb1ffaa5affb5f9",
+    "fixtures/upstream/schema-suite/validation/tests/oneOf.json": "08b605ef536df301e87bfac86700440d2edb9df377aded1fcf71b9467ef2f28a",
+    "fixtures/upstream/schema-suite/validation/tests/optional/bignum.json": "99e8e55a437776c40eb02b865d214f3d09740bb1cdcd9c77f776bb1567ea4cfe",
+    "fixtures/upstream/schema-suite/validation/tests/optional/content.json": "b8202472fa94d784b8fc73c440e702d05239fb0210b7fee3bd2ea2d8c3400c76",
+    "fixtures/upstream/schema-suite/validation/tests/optional/cross-draft.json": "1b577efa4163c77f20de75e20ff51f8adc5e13d35e35789a32d99d06409f4dbf",
+    "fixtures/upstream/schema-suite/validation/tests/optional/dependencies-compatibility.json": "c1a482654ee30dc176bade4f19764acaca1f977436a0bcc2802a72929d56f794",
+    "fixtures/upstream/schema-suite/validation/tests/optional/dynamicRef.json": "00950c362a78667cac436cbb59da2ebcfe93def0a067fa9c52c08e4b1e4443c5",
+    "fixtures/upstream/schema-suite/validation/tests/optional/ecmascript-regex.json": "36ab5dc3385ec8b423f0bcf18e2a440cef7c7b704c636b73eae1505c1b092443",
+    "fixtures/upstream/schema-suite/validation/tests/optional/float-overflow.json": "d5cd7d962a76c789218758713b2b5fcd2a15a05fa8dcfbc2a640798debfcf7ac",
+    "fixtures/upstream/schema-suite/validation/tests/optional/format-assertion.json": "9d78ec33bebe6e5a455a841b4ecbaeac2b0c178ea9a8d211dfe457cc46dca22a",
+    "fixtures/upstream/schema-suite/validation/tests/optional/format-regex.json": "5be5b52f7998771e3f60a8dfa7ebb11a09d077ae8842da3a03cdcc467a82f495",
+    "fixtures/upstream/schema-suite/validation/tests/optional/format-time.json": "21dc7d84a882c3163d6096b7862bbc690636c3fa763a21da62c33cf02aa02045",
+    "fixtures/upstream/schema-suite/validation/tests/optional/non-bmp-regex.json": "ed5538ed03e3aad1d5ba39647a2f362f9ada3f67eb656b973b734f06c7472cce",
+    "fixtures/upstream/schema-suite/validation/tests/optional/non-schemas.json": "6bd3bf6c81b6fb20c4c0868a54a34ca2446f171f4dd3fad80c9a69e4903799bf",
+    "fixtures/upstream/schema-suite/validation/tests/optional/zero-terminated-floats.json": "6dfa4552d7710a028ac65b14c220fd9fe30ce61c9025076de00e4f7b78d87382",
+    "fixtures/upstream/schema-suite/validation/tests/pattern.json": "6e4aa5d8b7ce9a8bd011ccfda0215185e7b13c5bcbdedc8e55fdff701ff57c9e",
+    "fixtures/upstream/schema-suite/validation/tests/patternProperties.json": "5fc0ef34b818cdd62320a8139f6b9b2d24a8bf5b67a73f7dcf13d0826fdc8ac1",
+    "fixtures/upstream/schema-suite/validation/tests/properties.json": "dbf6a9153f5ffd0af9b3772dcbe822fcd7214877a1f6fa0ef0fc0ab227178288",
+    "fixtures/upstream/schema-suite/validation/tests/propertyNames.json": "5e460c0daa902e6b04e3aecb1e152c86038ccf2fec6ac802976a40bcf3711ec1",
+    "fixtures/upstream/schema-suite/validation/tests/proposals/README.md": "7d195261e2ccc8bdd4019102b039a22a054c9cbbef4e3e8c6f81b06eaae1f38b",
+    "fixtures/upstream/schema-suite/validation/tests/proposals/propertyDependencies/additionalProperties.json": "4b09524e90a2ebac7ce0264a3c86d2dc2210e417b0f46ab5b03220f572a09898",
+    "fixtures/upstream/schema-suite/validation/tests/proposals/propertyDependencies/dynamicRef.json": "02f7d04e5686221bcc965c965bf6609eca092a2629986d7f9885c74242061af3",
+    "fixtures/upstream/schema-suite/validation/tests/proposals/propertyDependencies/propertyDependencies.json": "fd208c5f54eb647c5738bfeba9e7b9c568737aeb68798560a82477258233cda1",
+    "fixtures/upstream/schema-suite/validation/tests/proposals/propertyDependencies/unevaluatedProperties.json": "730102c598191324dfc6edb39bcc5616f9ac6be692d610fba29cd2472d515b02",
+    "fixtures/upstream/schema-suite/validation/tests/recursiveRef.json": "1172b0d070ce11bbf650a5fe3e03f931a73bf3b668bf1394788dbc6512436f08",
+    "fixtures/upstream/schema-suite/validation/tests/ref-legacy.json": "8062503287dbdc940840fca68a7bb8c3b3d829c275e82fbccc6b9c3c274a340f",
+    "fixtures/upstream/schema-suite/validation/tests/ref.json": "ac3766900220217a8352cb6835878589d076565205284bfcd93461377bf5e54e",
+    "fixtures/upstream/schema-suite/validation/tests/required.json": "21a10197ebb8335b44bd46dbbaac4468429526b7172b95f474e2a934a7df3f00",
+    "fixtures/upstream/schema-suite/validation/tests/type.json": "0b7c236b3295065d3bb93fdc8ff7e8874d8b0f7f08ac54e0e7e041512b6eb7c2",
+    "fixtures/upstream/schema-suite/validation/tests/unevaluatedItems.json": "e688b8908037f157b9d36917b0940bdc99fe148f67a689212fa3b34bfd2285a7",
+    "fixtures/upstream/schema-suite/validation/tests/unevaluatedProperties.json": "9b298919ae56b6d9ee6523f8f1d05b0ab83dc5b344528a844ab5867a9a2ceefe",
+    "fixtures/upstream/schema-suite/validation/tests/uniqueItems.json": "889649fa04b65bbfb2ddc944131047b9a9ba10ad68a4277f79c2a7374e894a1e",
+    "fixtures/upstream/schema-suite/validation/tests/vocabulary.json": "e7dde6865bdd9bdfa2cc1f9a1f8fe229255283c91304704452e70dcd6de72455",
+    "fixtures/v1-corpus/entries.json": "1c136d470c53560f95a05f4bb1908357245786138d70a8f775475a764846d25d",
+    "moon.mod": "d454e607bb2c0cec5046a55c45ff84fe908e631ba350b1c6809e70b24f30550c",
+    "requirements-oracle.txt": "2c3ec38f9d643401d1923aaae746b515a66b540c4df5c80e5815657c7b82e981",
+    "scripts/README.md": "1af56897e3a9d21268abd3c7a3986f0189e7335115ad83a4d22a1887fe55c849",
+    "scripts/benchmark.ps1": "5f584bb444138f5d6da5095d1ffc58a3ee51063ad670b1b7d7f70584d0337c9a",
+    "scripts/build-native.ps1": "2a820548a65243a1287865050f6438eadeb7c3ae21827fc7b1e936dc3e0e66d0",
+    "scripts/demo-launcher.c": "0a3ce3020f96eaee07ffe3e1bad7a28d8c839524b8e85e732f9598b7342797fe",
+    "scripts/demo-window.ps1": "816d5dcc3809a2c566892ddfe39e57cefae50dd308ea7550c206a287ab8c4e70",
+    "scripts/env.ps1": "ad541edbf2bbbd4541904dbac2b33282022dae4d53df2bc0013344f99c46f663",
+    "scripts/harness.ps1": "32ef15ffa57e8e99fa5b1e4595fced3a5d878eb6b3e68645577ab0f7d426ec92",
+    "scripts/install-toolchain.ps1": "35bae914cde695a3fecbbef6995740b106a7fccf42f4796819713242c4c5aa06",
+    "scripts/render-demo.py": "d4f6d1caf6424fab7b41568f0b1c11a9be01c4defd3cd08d092147042326827a",
+    "scripts/setup-depth.ps1": "ba5a952b778a4515044155996e8b2e8ff309e61b24788dcbe608b5f8de7760c8",
+    "scripts/verify-all.ps1": "d20d60aa509ca0e932f5bffa654f06a197885da89f0ed62ede0c4a966886d8f6",
+    "scripts/verify-depth.py": "6e305f313cf0fa749804d0abdd8355a303c485804a6a35723c9915eeb05fc1b3",
+    "scripts/verify-mutations.py": "856504e6e387e195ad32ddd5db036df35dec48f610da2fed9fdcb355ea438d61",
+    "scripts/verify-process.py": "6ea8f5a39c45e3bd4ac06932a025850d805e8a5564f9f5877d4c7801b0903312",
+    "toolchain.lock.json": "a66e572dd4c9caee27f4ca4dcf9f3b067e054c87ba39687d7829c6fd3f088064",
+    "tools/url_query.py": "dd4b49c7b17c04293e025353b5b71226ddaacaff96feefe687d73519393ec354"
+  },
+  "binary_sha256": "556c4f09ee6a185d0b45ec4201dec8ffa94abfe3a7e6234727d05555093ea1d8",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "real_case": {
+    "kind": "stdlib_configuration_contract_mismatch",
+    "upstream_bug_claimed": false,
+    "default_failed": 3,
+    "generated": 32,
+    "signature_groups": 1,
+    "minimal_input": {
+      "value": ""
+    },
+    "fixed_failed": 0
+  },
+  "reference": "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.parse_qs",
+  "synthetic_transport_modes": 12,
+  "independent_human_trial": false
+}

@@ -1,0 +1,17 @@
+{
+  "source_commit": "01fbb786b0c7ca41ffd00309ab1996cee83dc254",
+  "rows": [
+    {
+      "label": "before",
+      "binary_sha256": "556c4f09ee6a185d0b45ec4201dec8ffa94abfe3a7e6234727d05555093ea1d8",
+      "exit": 0,
+      "expected_unicode_report_exists": false
+    },
+    {
+      "label": "after",
+      "binary_sha256": "efcd2b3afb9245883c56ccd2f7a04e500fd0c51df1a3cede3ada880c47eae751",
+      "exit": 0,
+      "expected_unicode_report_exists": true
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+[
+  {
+    "input": {
+      "value": ""
+    },
+    "default": {
+      "values": []
+    },
+    "preserve": {
+      "values": [
+        ""
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "a&b=c"
+    },
+    "default": {
+      "values": [
+        "a&b=c"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "a&b=c"
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "+ %"
+    },
+    "default": {
+      "values": [
+        "+ %"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "+ %"
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "中文"
+    },
+    "default": {
+      "values": [
+        "中文"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "中文"
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "🙂"
+    },
+    "default": {
+      "values": [
+        "🙂"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "🙂"
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "\u0000"
+    },
+    "default": {
+      "values": [
+        "\u0000"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "\u0000"
+      ]
+    }
+  },
+  {
+    "input": {
+      "value": "line\nnext"
+    },
+    "default": {
+      "values": [
+        "line\nnext"
+      ]
+    },
+    "preserve": {
+      "values": [
+        "line\nnext"
+      ]
+    }
+  }
+]

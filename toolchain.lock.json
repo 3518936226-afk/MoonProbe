@@ -1,0 +1,22 @@
+{
+  "moon": "0.1.20261119 (738607b 2026-11-19)",
+  "moonc": "v0.10.22+124d61d05 (2026-11-19)",
+  "core": "0.10.22+124d61d05",
+  "platform": "windows-x86_64",
+  "archives": [
+    {
+      "name": "moonbit-windows-x86_64.zip",
+      "url": "https://cli.moonbitlang.com/binaries/0.10.22%2B124d61d05/moonbit-windows-x86_64.zip",
+      "sha256": "8e552848a5c06dcce6bab725687562a689397948b7144e9087e9ffa4c1d38be4",
+      "official_checksum_verified": true
+    },
+    {
+      "name": "core.zip",
+      "url": "https://cli.moonbitlang.com/cores/core-0.10.22%2B124d61d05.zip",
+      "sha256": "2ce9e6112f2db09eeb52c7865459df3de27e42badb6be26db77347187ab8fbfe",
+      "official_checksum_verified": false
+    }
+  ],
+  "compiler": "MinGW GCC 15.2.0",
+  "note": "Official version-specific URLs, additionally pinned by SHA-256. Upstream advertises finite archive retention; retain original verified archives locally for -ArchiveDir. Compiler archives are not redistributed by this repository. No unverified replacement is accepted."
+}

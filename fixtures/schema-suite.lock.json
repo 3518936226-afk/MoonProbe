@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/json-schema-org/JSON-Schema-Test-Suite",
+  "commit": "e2a68a15cd490750fd6b95e604e4054d7d978d1f",
+  "dialect": "2020-12",
+  "selection": "Unmodified schemas/instances/expected values within declared subset, compatible with 2020-12, no external schemas or unsupported tags."
+}

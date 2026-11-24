@@ -1,0 +1,9 @@
+/toolchain/
+/work/
+/_build/
+/target/
+/.mooncakes/
+/src/
+*.exe
+*.obj
+*.o

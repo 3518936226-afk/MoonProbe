@@ -1,0 +1,14 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonprobe/moonprobe/cmd/moonprobe"
+
+// Values
+
+// Errors
+type LocalIO
+
+// Types and methods
+type Config
+
+// Type aliases
+
+// Traits
