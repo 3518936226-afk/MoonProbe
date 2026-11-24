@@ -26,3 +26,5 @@ The extract_deadline example has an explicit date enum; date format validation i
 ## v0.2 generation and reduction budgets
 
 The 200-case limit is an upper bound on unique cases. At most 2000 candidate visits and 2000 witness obligations are accepted; over-large catalogues fail explicitly. Produced cases remain within 512 nodes and 65536 bytes; an out-of-budget witness stays uncovered with a reason. Full report/corpus files must each fit 1 MiB. Shrink visits default to 100 and can be configured to 1000; these include duplicate and rejected candidates, unlike the legacy accepted-size-only counter. Enum complements and optional-presence pairwise limits are described in v0.2-design.md.
+
+v0.2.1 accepts nonempty adapter identities up to 80 UTF-16 units. Custom families require explicit --process configuration for test/replay. The Windows process protocol and limits are documented in real-tool-case.md; it is not an MCP or network transport.

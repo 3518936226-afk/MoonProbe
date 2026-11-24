@@ -246,8 +246,8 @@ pub fn load_spec(j : Json) -> Spec raise ProbeError {
   if name == "" {
     invalid("/name", "nonempty tool name required")
   }
-  if !["extract_deadline", "echo"].contains(adapter) {
-    invalid("/adapter_id", "unregistered local adapter")
+  if adapter == "" || adapter.length() > 80 {
+    invalid("/adapter_id", "adapter identity must have 1..80 UTF-16 units")
   }
   let input = field(j, "input_schema")
   check_schema(input, "/input_schema", 1)

@@ -13,6 +13,7 @@ struct Config {
   workload : String
   repeat : Int32
   shrink_budget : Int32
+  process_config : String
 }
 
 ///|
@@ -56,6 +57,7 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
   let mut workload = "generate"
   let mut repeat = 20
   let mut shrink_budget = 100
+  let mut process_config = ""
   let mut i = 3
   if command == "replay" {
     if i >= argv.length() {
@@ -76,6 +78,15 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
     }
     let v = argv[i + 1]
     match k {
+      "--process" => {
+        if command != "test" && command != "replay" {
+          bad("--process only supported by test and replay")
+        }
+        if v == "" {
+          bad("process config path required")
+        }
+        process_config = v
+      }
       "--mock" => {
         if command == "inspect" || command == "bench" {
           bad("--mock only supported by test and replay")
@@ -141,6 +152,9 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
   if command == "test" && out == "" {
     bad("test requires --out <directory>")
   }
+  if process_config != "" && seen.contains("--mock") {
+    bad("--process and --mock are mutually exclusive")
+  }
   {
     command,
     spec_path,
@@ -152,6 +166,7 @@ fn parse(argv : Array[String]) -> Config raise @engine.ProbeError {
     workload,
     repeat,
     shrink_budget,
+    process_config,
   }
 }
 
@@ -251,12 +266,21 @@ fn benchmark(
 ///|
 fn execute(c : Config) -> Int32 raise {
   let spec = @engine.load_spec(read_json(c.spec_path))
+  let adapter = if c.process_config != "" {
+    process_adapter(spec, read_json(c.process_config))
+  } else {
+    if (c.command == "test" || c.command == "replay") &&
+      !["echo", "extract_deadline"].contains(spec.adapter) {
+      bad("adapter family requires explicit --process configuration")
+    }
+    @engine.local_adapter(spec.adapter, c.version)
+  }
   match c.command {
     "inspect" => {
       println(
         @engine.canonical({
-          "engine_version": "0.2.0",
-          "mode": "offline_mock",
+          "engine_version": "0.2.1",
+          "mode": "contract_inspection",
           "name": spec.name,
           "adapter_family": spec.adapter,
           "schema_fingerprint": spec.fingerprint,
@@ -277,11 +301,19 @@ fn execute(c : Config) -> Int32 raise {
       0
     }
     "test" => {
-      let report = @engine.test_report(
+      // Reject an occupied destination before invoking an external tool.
+      let report_path = c.out + "/report.json"
+      let corpus_path = c.out + "/corpus/entries.json"
+      if exists(report_path) || exists(corpus_path) {
+        bad(
+          "output report or corpus already exists; choose a new --out directory",
+        )
+      }
+      let report = @engine.test_adapter_report(
         spec,
         c.seed,
         c.cases,
-        c.version,
+        adapter,
         budget=c.shrink_budget,
       )
       let corpus_text = @engine.canonical({
@@ -294,12 +326,10 @@ fn execute(c : Config) -> Int32 raise {
         bad("ARTIFACT_BUDGET exceeds 1 MiB; use fewer cases or smaller schema")
       }
       make_dirs(c.out)
-      let report_path = c.out + "/report.json"
       if exists(report_path) {
         bad("output report already exists; choose a new --out directory")
       }
       make_dirs(c.out + "/corpus")
-      let corpus_path = c.out + "/corpus/entries.json"
       if exists(corpus_path) {
         bad("output corpus already exists; choose a new --out directory")
       }
@@ -330,7 +360,7 @@ fn execute(c : Config) -> Int32 raise {
         bad("corpus entries must be an array")
         return 2
       }
-      let report = @engine.replay_report(spec, entries, c.version)
+      let report = @engine.replay_adapter_report(spec, entries, adapter)
       println(@engine.canonical(report))
       if @engine.num(@engine.field(report, "failed")) > 0.0 {
         1
@@ -349,12 +379,12 @@ fn execute(c : Config) -> Int32 raise {
 fn main {
   let argv = @env.args()
   if argv.length() == 2 && argv[1] == "--version" {
-    println("MoonProbe 0.2.0")
+    println("MoonProbe 0.2.1")
     return
   }
   if argv.length() == 2 && argv[1] == "--help" {
     println(
-      "MoonProbe 0.2.0\ninspect <toolspec>\ntest <toolspec> --mock buggy|fixed --seed N --cases 1..200 --shrink-budget 1..1000 --out DIR\nreplay <toolspec> <corpus-directory> --mock buggy|fixed\nbench <toolspec> --workload generate|execute|shrink|compare --repeat 1..1000",
+      "MoonProbe 0.2.1\ninspect <toolspec>\ntest <toolspec> [--mock buggy|fixed | --process CONFIG] --seed N --cases 1..200 --shrink-budget 1..1000 --out DIR\nreplay <toolspec> <corpus-directory> [--mock buggy|fixed | --process CONFIG]\nbench <toolspec> --workload generate|execute|shrink|compare --repeat 1..1000",
     )
     return
   }

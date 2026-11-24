@@ -2,7 +2,7 @@
 
 MoonProbe 是以 MoonBit 为主要实现语言的离线工具契约测试引擎。v0.2 从本地 ToolSpec 编译带类型的契约 IR，生成唯一的合法、边界和反向输入，定位输出契约违例，缩减反例，并用历史语料验证修复。
 
-首发 Windows x64 Native。示例与故障均为合成夹具。CLI 无需 Python、网络、凭据或外部工具进程；仅源码构建和开发验证需要额外工具。
+首发 Windows x64 Native。CLI 本身无需 Python、网络或凭据；内置示例为合成夹具。v0.2.1 新增显式 --process 本地进程适配器，已实际接入 Python 标准库 URL 表单解析器，发现并修复空值保留配置与消费契约不匹配的问题。它不属于 Python 上游缺陷；复现、证据口径和进程限制见 docs/real-tool-case.md。
 
 ## 运行
 

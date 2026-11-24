@@ -35,6 +35,7 @@ try {
   New-Item -ItemType Directory -Force -Path (Split-Path $out -Parent) | Out-Null
   $sources = @($generated,"$env:MOON_HOME\lib\runtime\runtime.c","$env:MOON_HOME\lib\runtime\env.c","$env:MOON_HOME\lib\runtime\utf.c","$env:MOON_HOME\lib\runtime\backtrace.c")
   if (!$Test) { $sources += $(if($Oracle){'cmd\oracle\native_io.c'}else{'cmd\moonprobe\native_io.c'}) }
+  if (!$Test -and !$Oracle) { $sources += 'cmd\moonprobe\native_process.c' }
   & $Gcc '-O2' '-fwrapv' '-fno-strict-aliasing' '-ffp-contract=off' '-DMOONBIT_ALLOCATOR=MOONBIT_ALLOCATOR_SYSTEM' "-I$env:MOON_HOME\include" @sources '-lm' '-o' $out
   if ($LASTEXITCODE) { throw 'Native linking failed' }
   Write-Output (Join-Path $ProjectRoot $out)

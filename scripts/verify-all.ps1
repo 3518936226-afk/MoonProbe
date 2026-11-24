@@ -4,6 +4,8 @@ if(!$Python){$Python=(Get-Command python.exe -ErrorAction Stop).Source}
 $env:PYTHONDONTWRITEBYTECODE='1';$env:PYTHONNOUSERSITE='1'
 if(!$OutDir){$OutDir="$ProjectRoot\work\verification-$([DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfff'))"}
 & "$PSScriptRoot\harness.ps1" -OutDir "$OutDir\harness"
+& $Python "$PSScriptRoot\verify-process.py" --out "$OutDir\process-case"
+if($LASTEXITCODE){throw 'Real tool and process transport verification failed'}
 & "$PSScriptRoot\build-native.ps1" -Oracle
 & $Python "$PSScriptRoot\verify-depth.py" "$OutDir\independent"
 if($LASTEXITCODE){throw 'Independent verification failed'}

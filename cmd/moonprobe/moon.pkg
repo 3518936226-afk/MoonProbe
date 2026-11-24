@@ -9,5 +9,5 @@ import {
 pkgtype(kind: "executable")
 
 options(
-  "native-stub": [ "native_io.c" ],
+  "native-stub": [ "native_io.c", "native_process.c" ],
 )

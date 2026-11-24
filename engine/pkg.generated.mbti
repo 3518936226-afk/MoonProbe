@@ -44,6 +44,8 @@ pub fn num(@json.Json) -> Double
 
 pub fn obj(@json.Json) -> Map[String, @json.Json]
 
+pub fn replay_adapter_report(Spec, Array[@json.Json], Adapter) -> @json.Json raise ProbeError
+
 pub fn replay_report(Spec, Array[@json.Json], String) -> @json.Json raise ProbeError
 
 pub fn run_adapter(Spec, Case, Adapter) -> Outcome
@@ -59,6 +61,8 @@ pub fn shrink_adapter(Spec, Case, Adapter, budget? : Int32) -> DeepShrink
 pub fn shrink_legacy(Spec, Case, String, budget? : Int32) -> ShrinkResult
 
 pub fn shrink_legacy_adapter(Spec, Case, Adapter, budget? : Int32) -> ShrinkResult
+
+pub fn test_adapter_report(Spec, Int32, Int32, Adapter, budget? : Int32) -> @json.Json raise ProbeError
 
 pub fn test_report(Spec, Int32, Int32, String, budget? : Int32) -> @json.Json raise ProbeError
 

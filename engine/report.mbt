@@ -6,12 +6,29 @@ pub fn test_report(
   version : String,
   budget~ : Int32 = 100,
 ) -> Json raise ProbeError {
+  test_adapter_report(
+    spec,
+    seed,
+    count,
+    local_adapter(spec.adapter, version),
+    budget~,
+  )
+}
+
+///|
+pub fn test_adapter_report(
+  spec : Spec,
+  seed : Int32,
+  count : Int32,
+  adapter : Adapter,
+  budget~ : Int32 = 100,
+) -> Json raise ProbeError {
+  let version = adapter.version
   if budget < 1 || budget > 1000 {
     raise Invalid("shrink budget must be 1..1000")
   }
   let generated = generate_result(spec, seed, count)
   let cases = generated.cases
-  let adapter = local_adapter(spec.adapter, version)
   let results : Array[Json] = []
   let corpus : Array[Json] = []
   let groups : Map[String, Array[Int32]] = Map([])
@@ -92,7 +109,7 @@ pub fn test_report(
   signatures.sort_by((a, b) => a.lexical_compare(b))
   {
     "format_version": 2,
-    "engine_version": "0.2.0",
+    "engine_version": "0.2.1",
     "generator_version": "coverage-v2",
     "tool_name": spec.name,
     "schema_fingerprint": spec.fingerprint,
@@ -157,6 +174,16 @@ pub fn replay_report(
   entries : Array[Json],
   version : String,
 ) -> Json raise ProbeError {
+  replay_adapter_report(spec, entries, local_adapter(spec.adapter, version))
+}
+
+///|
+pub fn replay_adapter_report(
+  spec : Spec,
+  entries : Array[Json],
+  adapter : Adapter,
+) -> Json raise ProbeError {
+  let version = adapter.version
   if entries.is_empty() || entries.length() > 200 {
     raise Invalid("corpus must contain 1..200 entries")
   }
@@ -200,7 +227,7 @@ pub fn replay_report(
       category: "replay",
       expected: decode_expected(field(e, "expected")),
     }
-    let actual = run_case(spec, c, version).failure
+    let actual = run_adapter(spec, c, adapter).failure
     let status = match actual {
       None => "fixed"
       Some(f) => {
@@ -221,7 +248,7 @@ pub fn replay_report(
   }
   {
     "format_version": 1,
-    "engine_version": "0.2.0",
+    "engine_version": "0.2.1",
     "schema_fingerprint": spec.fingerprint,
     "adapter_family": spec.adapter,
     "adapter_version": version,

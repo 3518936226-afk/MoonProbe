@@ -1,6 +1,6 @@
 {
   "format_version": 2,
-  "release": "0.2.0",
+  "release": "0.2.1",
   "commit_binding": "manifest.json source_commit; each raw verification summary records its source_commit",
   "dimensions": [
     {
@@ -33,13 +33,15 @@
     },
     {
       "dimension": "impact",
-      "status": "synthetic_only",
+      "status": "real_stdlib_configuration_case",
       "evidence": [
-        "evidence/demo/report.json",
-        "evidence/demo/transcript.json"
+        "evidence/process-case/summary.json",
+        "evidence/process-case/default/report.json",
+        "evidence/process-case/fixed-replay.stdout.log",
+        "docs/real-tool-case.md"
       ],
       "external_gaps": [
-        "authorized real-world defect",
+        "authorized real-user product defect beyond this stdlib configuration case",
         "independent developer reproduction",
         "measured manual-task comparison"
       ]
@@ -77,8 +79,7 @@
     "human_understanding": "pending_participant_review"
   },
   "demo": {
-    "animation": "demo/MoonProbe-demo.gif",
-    "type": "rendered_actual_command_output",
+    "type": "raw_process_execution_logs",
     "desktop_recording": "pending_not_claimed"
   }
 }
