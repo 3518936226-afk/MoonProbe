@@ -22,6 +22,8 @@ buggy 的 test/replay 预期退出 1，fixed 回放退出 0。输出目录必须
 
 ZIP SHA-256：1ca5368641c9f744155585335b8980098101fd1789362735d16f43d05cefd7f5。
 
+上面保留的是历史 v0.2.1 包。当前源码 v0.2.2 修复了远程 CI 发现的 MinGW Unicode 命令行参数问题；处理中文或 emoji 路径应使用当前源码构建，新的修复包将随 v0.2.2 发布提供。
+
 ## 从源码构建
 
 前提：Windows x64、PowerShell 7、Git、MinGW GCC。工具链版本/哈希固定在 [toolchain.lock.json](toolchain.lock.json)。源码检出不会包含预编译程序。

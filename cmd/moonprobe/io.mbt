@@ -1,4 +1,7 @@
 ///|
+extern "C" fn command_args_native() -> FixedArray[String] = "mp_cli_args"
+
+///|
 suberror LocalIO {
   IOError(String)
 }

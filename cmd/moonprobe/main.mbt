@@ -279,7 +279,7 @@ fn execute(c : Config) -> Int32 raise {
     "inspect" => {
       println(
         @engine.canonical({
-          "engine_version": "0.2.1",
+          "engine_version": "0.2.2",
           "mode": "contract_inspection",
           "name": spec.name,
           "adapter_family": spec.adapter,
@@ -377,14 +377,14 @@ fn execute(c : Config) -> Int32 raise {
 
 ///|
 fn main {
-  let argv = @env.args()
+  let argv = [ for arg in command_args_native() => arg ]
   if argv.length() == 2 && argv[1] == "--version" {
-    println("MoonProbe 0.2.1")
+    println("MoonProbe 0.2.2")
     return
   }
   if argv.length() == 2 && argv[1] == "--help" {
     println(
-      "MoonProbe 0.2.1\ninspect <toolspec>\ntest <toolspec> [--mock buggy|fixed | --process CONFIG] --seed N --cases 1..200 --shrink-budget 1..1000 --out DIR\nreplay <toolspec> <corpus-directory> [--mock buggy|fixed | --process CONFIG]\nbench <toolspec> --workload generate|execute|shrink|compare --repeat 1..1000",
+      "MoonProbe 0.2.2\ninspect <toolspec>\ntest <toolspec> [--mock buggy|fixed | --process CONFIG] --seed N --cases 1..200 --shrink-budget 1..1000 --out DIR\nreplay <toolspec> <corpus-directory> [--mock buggy|fixed | --process CONFIG]\nbench <toolspec> --workload generate|execute|shrink|compare --repeat 1..1000",
     )
     return
   }

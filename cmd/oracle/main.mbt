@@ -1,6 +1,6 @@
 ///|
 fn main {
-  let argv = @env.args()
+  let argv = [ for arg in command_args_native() => arg ]
   if argv.length() != 2 {
     eprintln("Internal oracle driver: vectors.json")
     @env.exit(2)

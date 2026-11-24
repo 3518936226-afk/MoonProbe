@@ -93,6 +93,10 @@ try {
   'not a directory' | Set-Content "$OutDir\blocked-output" -Encoding utf8NoBOM
   $null = Invoke-Probe 'write-error' @('test',$spec,'--out',"$OutDir\blocked-output") 3
   $null = Invoke-Probe 'unicode-path' @('test',"$ProjectRoot\examples\echo.json",'--out',"$OutDir\中文目录") 0
+  Check 'unicode-directory-exact' (Test-Path -LiteralPath "$OutDir\中文目录\report.json")
+  $unicodeSpec = "$OutDir\输入🙂.json"
+  Copy-Item -LiteralPath "$ProjectRoot\examples\echo.json" -Destination $unicodeSpec
+  $null = Invoke-Probe 'unicode-input-file' @('inspect',$unicodeSpec) 0
   $commit = & git rev-parse HEAD
   $summary = @{status='passed';source_commit=$commit;utc=[DateTime]::UtcNow.ToString('o');unit_groups=$number;checks=$checks;demo=@{cases=32;failed=$buggy.failed;passed=$buggy.passed;adapter_calls=$buggy.adapter_calls;original_bytes=$first.shrink.original_bytes;reduced_bytes=$first.shrink.reduced_bytes;reduction_ratio=$first.shrink.reduction_ratio}}
   $summary | ConvertTo-Json -Depth 50 | Set-Content "$OutDir\summary.json" -Encoding utf8NoBOM

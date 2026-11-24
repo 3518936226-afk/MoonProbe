@@ -223,7 +223,7 @@ fn compare_algorithms(
     )
   }
   {
-    "engine_version": "0.2.1",
+    "engine_version": "0.2.2",
     "clock": "monotonic",
     "seed": 20261123,
     "comparison": "v0.1 reference algorithms on the same v0.2 IR/adapter runtime",

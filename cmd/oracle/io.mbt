@@ -1,4 +1,7 @@
 ///|
+extern "C" fn command_args_native() -> FixedArray[String] = "mp_cli_args"
+
+///|
 #borrow(path)
 extern "C" fn read_native(path : Bytes) -> Bytes = "mp_read_file"
 

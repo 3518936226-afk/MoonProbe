@@ -1,5 +1,6 @@
 /* OS-only bridge. No Schema, generation, adapter, shrink or replay logic. */
 #include "moonbit.h"
+#include "../native_args.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

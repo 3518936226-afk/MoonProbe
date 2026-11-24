@@ -109,7 +109,7 @@ pub fn test_adapter_report(
   signatures.sort_by((a, b) => a.lexical_compare(b))
   {
     "format_version": 2,
-    "engine_version": "0.2.1",
+    "engine_version": "0.2.2",
     "generator_version": "coverage-v2",
     "tool_name": spec.name,
     "schema_fingerprint": spec.fingerprint,
@@ -248,7 +248,7 @@ pub fn replay_adapter_report(
   }
   {
     "format_version": 1,
-    "engine_version": "0.2.1",
+    "engine_version": "0.2.2",
     "schema_fingerprint": spec.fingerprint,
     "adapter_family": spec.adapter,
     "adapter_version": version,

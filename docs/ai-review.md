@@ -31,3 +31,9 @@ Coverage is conservative witness coverage of the declared target catalogue. A fu
 ## v0.2.1 and source publication
 
 The real process adapter and actual urllib.parse configuration mismatch are documented in real-tool-case.md. Blank-value preservation is a consumer requirement, not an alleged upstream defect. Public-source preparation preserves actual commits and the frozen local verification snapshot, repairs moving toolchain download addresses, and provides explicit cloud MinGW selection. Remote execution must be verified from its real Actions run. Human understanding is prepared through participant-review.md and remains pending.
+
+## Unicode argument regression (v0.2.2)
+
+The first independent Windows CI run (45426753846) failed the Chinese output-path case. The pinned official env.c MinGW argument fallback treats ANSI bytes as UTF-16 characters. The old local test checked only exit status and could accept a successful write to a misdecoded directory; it did not establish path fidelity.
+
+The project now uses a separate OS-only CommandLineToArgvW bridge returning FixedArray[String], with Shell32 linked explicitly. Both CLI and development oracle use this bridge; official runtime sources remain unchanged. Harness now verifies the exact Chinese output path and inspects a ToolSpec whose filename includes Chinese and an emoji. This is an actual cross-environment defect found by remote verification, separate from the stdlib configuration case.
