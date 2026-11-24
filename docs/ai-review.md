@@ -27,3 +27,7 @@ Additional findings addressed: repeated filler cases; identical random draws sha
 Twelve predetermined, successfully compiled source mutations test omission of required/additional-property rules, fractional integers, inclusive endpoints, Unicode code points, enum, array items, nested properties, output checks, failure signatures and fingerprint comparison. Compile failure, timeout and missing result messages are not accepted as killed mutants. The final summary supplies actual outcomes and source hashes.
 
 Coverage is conservative witness coverage of the declared target catalogue. A fully covered catalogue does not prove that every fault or branch was explored. Root causes are not inferred from signature counts. Independent machine checks are not human review; participant sign-off remains pending.
+
+## v0.2.1 and source publication
+
+The real process adapter and actual urllib.parse configuration mismatch are documented in real-tool-case.md. Blank-value preservation is a consumer requirement, not an alleged upstream defect. Public-source preparation preserves actual commits and the frozen local verification snapshot, repairs moving toolchain download addresses, and provides explicit cloud MinGW selection. Remote execution must be verified from its real Actions run. Human understanding is prepared through participant-review.md and remains pending.

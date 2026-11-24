@@ -1,0 +1,500 @@
+{
+  "status": "passed",
+  "demo": {
+    "original_bytes": 73,
+    "failed": 11,
+    "reduced_bytes": 21,
+    "adapter_calls": 13,
+    "passed": 21,
+    "reduction_ratio": 0.7123287671232876,
+    "cases": 32
+  },
+  "checks": [
+    {
+      "id": "format",
+      "status": "passed"
+    },
+    {
+      "id": "typecheck",
+      "status": "passed"
+    },
+    {
+      "id": "native-build",
+      "status": "passed"
+    },
+    {
+      "id": "native-test-build",
+      "status": "passed"
+    },
+    {
+      "id": "unit-results-count",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-0",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-1",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-2",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-3",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-4",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-5",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-6",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-7",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-8",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-9",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-10",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-11",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-12",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-13",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-14",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-15",
+      "status": "passed"
+    },
+    {
+      "id": "unit-engine_wbtest.mbt-16",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-0",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-1",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-2",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-3",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-4",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-5",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-6",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-7",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-8",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-9",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-10",
+      "status": "passed"
+    },
+    {
+      "id": "unit-depth_wbtest.mbt-11",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json"
+      ],
+      "expected_exit": 0,
+      "id": "inspect",
+      "actual_exit": 0,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\buggy"
+      ],
+      "expected_exit": 1,
+      "id": "buggy",
+      "actual_exit": 1,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\buggy-repeat"
+      ],
+      "expected_exit": 1,
+      "id": "buggy-repeat",
+      "actual_exit": 1,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--mock",
+        "fixed",
+        "--seed",
+        "20261123",
+        "--cases",
+        "32",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\fixed"
+      ],
+      "expected_exit": 0,
+      "id": "fixed",
+      "actual_exit": 0,
+      "status": "passed"
+    },
+    {
+      "id": "32-cases",
+      "status": "passed"
+    },
+    {
+      "id": "determinism",
+      "status": "passed"
+    },
+    {
+      "id": "fixed-all-pass",
+      "status": "passed"
+    },
+    {
+      "id": "invalid-zero-calls",
+      "status": "passed"
+    },
+    {
+      "id": "signature",
+      "status": "passed"
+    },
+    {
+      "id": "shrinking",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\buggy\\corpus",
+        "--mock",
+        "buggy"
+      ],
+      "expected_exit": 1,
+      "id": "replay-buggy",
+      "actual_exit": 1,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\buggy\\corpus",
+        "--mock",
+        "fixed"
+      ],
+      "expected_exit": 0,
+      "id": "replay-fixed",
+      "actual_exit": 0,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\not-found.json"
+      ],
+      "expected_exit": 3,
+      "id": "missing-file",
+      "actual_exit": 3,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--cases",
+        "201",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\bad"
+      ],
+      "expected_exit": 2,
+      "id": "bad-args",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--cases",
+        "1",
+        "--cases",
+        "2",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\bad"
+      ],
+      "expected_exit": 2,
+      "id": "duplicate-option",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\malformed.json"
+      ],
+      "expected_exit": 2,
+      "id": "malformed-json",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\unsupported.json"
+      ],
+      "expected_exit": 2,
+      "id": "unsupported-schema",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\duplicate.json"
+      ],
+      "expected_exit": 2,
+      "id": "duplicate-key",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\invalid-utf8.json"
+      ],
+      "expected_exit": 2,
+      "id": "invalid-utf8",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "inspect",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\too-large.json"
+      ],
+      "expected_exit": 2,
+      "id": "file-budget",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\corrupt",
+        "--mock",
+        "fixed"
+      ],
+      "expected_exit": 2,
+      "id": "fingerprint-mismatch",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "id": "unique-inputs",
+      "status": "passed"
+    },
+    {
+      "id": "signature-groups",
+      "status": "passed"
+    },
+    {
+      "id": "full-call-cost",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--mock",
+        "buggy",
+        "--shrink-budget",
+        "1",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\budget-one"
+      ],
+      "expected_exit": 1,
+      "id": "shrink-budget",
+      "actual_exit": 1,
+      "status": "passed"
+    },
+    {
+      "id": "shrink-budget-enforced",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--shrink-budget",
+        "1001",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\bad-budget"
+      ],
+      "expected_exit": 2,
+      "id": "bad-shrink-budget",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\fixtures\\v1-corpus",
+        "--mock",
+        "fixed"
+      ],
+      "expected_exit": 0,
+      "id": "v1-replay-fixed",
+      "actual_exit": 0,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "replay",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\fixtures\\v1-corpus",
+        "--mock",
+        "buggy"
+      ],
+      "expected_exit": 1,
+      "id": "v1-replay-buggy",
+      "actual_exit": 1,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\fixed"
+      ],
+      "expected_exit": 2,
+      "id": "no-overwrite",
+      "actual_exit": 2,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\extract-deadline.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\blocked-output"
+      ],
+      "expected_exit": 3,
+      "id": "write-error",
+      "actual_exit": 3,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\bin\\moonprobe.exe",
+        "test",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\examples\\echo.json",
+        "--out",
+        "D:\\Users\\LX\\VAPP\\moonprobe\\work\\v021-clean\\work\\acceptance\\中文目录"
+      ],
+      "expected_exit": 0,
+      "id": "unicode-path",
+      "actual_exit": 0,
+      "status": "passed"
+    }
+  ],
+  "unit_groups": 29,
+  "utc": "2026-11-24T14:53:47.8707195Z",
+  "source_commit": "da358f2841db20c46db8cb18615be174bf62f0cc"
+}

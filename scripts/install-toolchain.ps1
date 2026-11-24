@@ -14,7 +14,7 @@ foreach ($archive in $lock.archives) {
     & curl.exe -4 -fL --retry 3 --connect-timeout 15 --max-time 300 $archive.url -o $file
     if ($LASTEXITCODE) { throw "Download failed: $($archive.name)" }
   }
-  if ((Get-FileHash -Algorithm SHA256 -LiteralPath $file).Hash.ToLowerInvariant() -ne $archive.sha256) { throw "SHA256 mismatch: $file. Upstream latest may have changed; use pinned offline archives." }
+  if ((Get-FileHash -Algorithm SHA256 -LiteralPath $file).Hash.ToLowerInvariant() -ne $archive.sha256) { throw "SHA256 mismatch: $file. Refusing replacement; use original verified offline archives." }
   $target = if ($archive.name -eq 'core.zip') { "$destination\lib" } else { $destination }
   Expand-Archive -LiteralPath $file -DestinationPath $target -Force
 }
